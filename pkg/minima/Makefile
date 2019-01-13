@@ -3,7 +3,7 @@ HDRS=minima.h
 
 ################################################################################
 
-.PHONY: all clean test
+.PHONY: all install clean test
 
 all: libminima.a minima.h
 

@@ -2,7 +2,7 @@ HDRS=mid.h
 
 ################################################################################
 
-.PHONY: all clean test
+.PHONY: all install clean test
 
 all: prog.exe
 
