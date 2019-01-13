@@ -10,7 +10,7 @@ use regex::Regex;
 
 #[link(name = "minima")]
 extern {
-    fn min(x: u32, y: u32) -> u32;
+    fn minima(x: u32, y: u32) -> u32;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ pub fn rust_dependency_example() {
 pub fn c99_dependency_example() {
     let x : u32 = 1;
     let y : u32 = 2;
-    let z : u32 = unsafe { min(x,y) };
+    let z : u32 = unsafe { minima(x,y) };
     println!("{} is the smallest out of {} and {}", z, x, y);
 }
 

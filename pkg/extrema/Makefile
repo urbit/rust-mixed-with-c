@@ -1,34 +1,42 @@
-CFLAGS=-O3 -Wall -std=c99
-HDRS=extrema.h
+name ?= extrema
+
+TMP ?= ../../work
+out ?= ../../out
+b    = ${TMP}/${name}
+
+CFLAGS  ?= -I${out}/include -std=c99
+LDFLAGS ?= -L${out}/lib
+CC      ?= cc
+AR      ?= ar
 
 ################################################################################
 
-.PHONY: all install clean test
+.PHONY: all install test clean
 
-all: libextrema.a extrema.h
+all: $b/libextrema.a extrema.h
 
-install: libextrema.a extrema.h
+install: all
 	mkdir -p ${out}/lib
 	mkdir -p ${out}/include
-	cp libextrema.a ${out}/lib
+	cp $b/libextrema.a ${out}/lib
 	cp extrema.h ${out}/include
 
-clean:
-	rm -f *.o *.a *.exe result
+test: $b/test
+	$b/test
 
-test: test.exe
-	./test.exe
-
-################################################################################
-
-libextrema.a: extrema.o
-	ar rcs $@ $<
-
-test.exe: test.o libextrema.a
-	printenv | grep minima
-	cc $< -L. -lextrema -lminima -o $@
+clean: $b
+	rm -f $b/*
 
 ################################################################################
 
-%.o: %.c ${HDRS}
-	cc -c ${CFLAGS} $< -o $@
+$b:
+	mkdir -p $b
+
+$b/libextrema.a: $b/extrema.o $b
+	${AR} rcs $@ $<
+
+$b/test: $b/test.o $b/libextrema.a $b
+	${CC} ${LDFLAGS} $< -lextrema -lminima -o $@
+
+$b/%.o: %.c extrema.h $b
+	${CC} ${CFLAGS} -c -o $@ $<

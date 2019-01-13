@@ -1,27 +1,37 @@
-HDRS=mid.h
+name ?= prog
+
+TMP ?= ../../work
+out ?= ../../out
+b    = ${TMP}/${name}
+
+CFLAGS  ?= -I${out}/include -std=c99
+LDFLAGS ?= -L${out}/lib
+CC      ?= cc
+AR      ?= ar
 
 ################################################################################
 
-.PHONY: all install clean test
+.PHONY: all install test clean
 
-all: prog.exe
+all: $b/prog
 
-install: prog.exe
+install: all
 	mkdir -p ${out}/bin
-	cp prog.exe ${out}/bin/prog.exe
+	cp $b/prog ${out}/bin
 
-clean:
-	rm -f *.o *.a *.exe
+test: $b/prog
+	$b/prog
 
-test: prog.exe
-	./prog.exe
-
-################################################################################
-
-prog.exe: prog.o
-	cc $< -lrusthello -lminima -lpthread -ldl -o $@
+clean: $b
+	rm -f $b/*
 
 ################################################################################
 
-%.o: %.c ${HDRS}
-	cc -c ${CFLAGS} $< -o $@
+$b:
+	mkdir -p $b
+
+$b/prog: $b/prog.o $b
+	${CC} ${LDFLAGS} $< -lrusthello -lminima -lpthread -ldl -o $@
+
+$b/%.o: %.c $b
+	${CC} ${CFLAGS} -c -o $@ $<
