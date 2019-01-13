@@ -12,6 +12,8 @@ in
 { pkgs ? import nixpkgs {} }:
 
 rec {
+  inherit pkgs;
+
   minima =
     pkgs.stdenv.mkDerivation {
       name = "minima";
