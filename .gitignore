@@ -1,0 +1,7 @@
+*.o
+*.a
+*.exe
+result
+result-*
+pkg/*/target
+pkg/**/*.rs.bk
