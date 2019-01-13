@@ -1,11 +1,12 @@
 name ?= extrema
 
-TMP ?= ../../work
-out ?= ../../out
-b    = ${TMP}/${name}
+TMP  ?= ../../work
+out  ?= ../../out
+b    := ${TMP}/${name}
+hack := $(shell mkdir -p $b)
 
 CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib
+LDFLAGS ?= -L${out}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -24,19 +25,16 @@ install: all
 test: $b/test
 	$b/test
 
-clean: $b
+clean:
 	rm -f $b/*
 
 ################################################################################
 
-$b:
-	mkdir -p $b
-
-$b/libextrema.a: $b/extrema.o $b
+$b/libextrema.a: $b/extrema.o
 	${AR} rcs $@ $<
 
-$b/test: $b/test.o $b/libextrema.a $b
+$b/test: $b/test.o $b/libextrema.a
 	${CC} ${LDFLAGS} $< -lextrema -lminima -o $@
 
-$b/%.o: %.c extrema.h $b
+$b/%.o: %.c extrema.h
 	${CC} ${CFLAGS} -c -o $@ $<

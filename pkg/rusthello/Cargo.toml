@@ -1,10 +1,11 @@
 [package]
-name = "rusthello"
+name    = "rusthello"
 version = "0.1.0"
 authors = ["Benjamin Summers <benjamin@tlon.io>"]
+build   = "build.rs"
 
 [lib]
-name = "rusthello"
+name       = "rusthello"
 crate-type = ["staticlib"]
 
 [dependencies]

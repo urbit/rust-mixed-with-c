@@ -1,11 +1,12 @@
 name ?= prog
 
-TMP ?= ../../work
-out ?= ../../out
-b    = ${TMP}/${name}
+TMP  ?= ../../work
+out  ?= ../../out
+b    := ${TMP}/${name}
+hack := $(shell mkdir -p $b)
 
 CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib
+LDFLAGS ?= -L${out}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -22,16 +23,13 @@ install: all
 test: $b/prog
 	$b/prog
 
-clean: $b
+clean:
 	rm -f $b/*
 
 ################################################################################
 
-$b:
-	mkdir -p $b
-
-$b/prog: $b/prog.o $b
+$b/prog: $b/prog.o
 	${CC} ${LDFLAGS} $< -lrusthello -lminima -lpthread -ldl -o $@
 
-$b/%.o: %.c $b
+$b/%.o: %.c
 	${CC} ${CFLAGS} -c -o $@ $<

@@ -1,11 +1,12 @@
 name ?= minima
 
-TMP ?= ../../work
-out ?= ../../out
-b    = ${TMP}/${name}
+TMP  ?= ../../work
+out  ?= ../../out
+b    := ${TMP}/${name}
+hack := $(shell mkdir -p $b)
 
 CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib
+LDFLAGS ?= -L${out}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -24,19 +25,16 @@ install: all
 test: $b/test
 	$b/test
 
-clean: $b
+clean:
 	rm -f $b/*
 
 ################################################################################
 
-$b:
-	mkdir -p $b
-
-$b/libminima.a:  $b/minima.o $b
+$b/libminima.a: $b/minima.o
 	${AR} rcs $@ $<
 
-$b/test: $b/test.o $b/libminima.a $b
+$b/test: $b/test.o $b/libminima.a
 	${CC} ${LDFLAGS} $< -lminima -o $@
 
-$b/%.o: %.c minima.h $b
+$b/%.o: %.c minima.h
 	${CC} ${CFLAGS} -c -o $@ $<

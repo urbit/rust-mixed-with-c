@@ -1,8 +1,9 @@
 name ?= rusthello
 
-TMP ?= ../../work
-out ?= ../../out
-b    = ${TMP}/${name}
+TMP  ?= ../../work
+out  ?= ../../out
+b    := ${TMP}/${name}
+hack := $(shell mkdir -p $b)
 
 ################################################################################
 
@@ -17,10 +18,10 @@ install: all
 	cp include/rusthello.h ${out}/include
 
 test:
-	CARGO_TARGET_DIR=$b cargo test
+	out=${out} CARGO_TARGET_DIR=$b cargo test
 
 clean:
-	CARGO_TARGET_DIR=$b cargo clean
+	out=${out} CARGO_TARGET_DIR=$b cargo clean
 
 ################################################################################
 
@@ -28,4 +29,4 @@ $b:
 	mkdir -p $b
 
 $b/debug/librusthello.a: $b
-	CARGO_TARGET_DIR=$b cargo build
+	out=${out} CARGO_TARGET_DIR=$b cargo build
