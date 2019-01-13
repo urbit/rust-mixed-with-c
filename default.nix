@@ -1,4 +1,4 @@
-{ pkgs ?
+{ nixpkgs ?
     builtins.fetchGit {
       name = "nixpkgs-2018-11-13";
       url = https://github.com/nixos/nixpkgs/;
@@ -7,6 +7,9 @@
 }:
 
 rec {
-  low = import ./low { inherit pkgs; };
-  mid = import ./mid { inherit pkgs low; };
+  pkgs      = nixpkgs;
+  minima    = import ./pkg/minima    { inherit pkgs; };
+  extrema   = import ./pkg/extrema   { inherit pkgs minima; };
+  rusthello = import ./pkg/rusthello { inherit pkgs minima extrema; };
+  prog      = import ./pkg/prog      { inherit pkgs minima rusthello; };
 }
