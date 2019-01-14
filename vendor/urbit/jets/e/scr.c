@@ -119,7 +119,7 @@ static int _crypto_scrypt(const uint8_t *, size_t, const uint8_t *, size_t,
     b_p[pl] = 0; b_s[sl]=0;
     c3_y* buf = u3a_malloc(d);
 
-    libscrypt_PBKDF2_SHA256(b_p, pl, b_s, sl, c, buf, d);
+    // libscrypt_PBKDF2_SHA256(b_p, pl, b_s, sl, c, buf, d);
 
     u3_noun res = u3i_bytes(d, buf);
     u3a_free(b_p); u3a_free(b_s); u3a_free(buf);
@@ -154,7 +154,7 @@ static int _crypto_scrypt(const uint8_t *, size_t, const uint8_t *, size_t,
     b_p[pl] = 0; b_s[sl]=0;
     c3_y* buf = u3a_malloc(d);
 
-    libscrypt_PBKDF2_SHA256(b_p, pl, b_s, sl, c, buf, d);
+    // libscrypt_PBKDF2_SHA256(b_p, pl, b_s, sl, c, buf, d);
 
     u3_noun res = u3i_bytes(d, buf);
     u3a_free(b_p); u3a_free(b_s); u3a_free(buf);

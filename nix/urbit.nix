@@ -22,7 +22,8 @@ let
 
   flags =
      with pkgs;
-     lib.optionalString stdenv.isDarwin "-framework CoreServices";
+     lib.optionalString stdenv.isDarwin
+       "-framework CoreServices -framework CoreFoundation";
 
 in
 
@@ -30,5 +31,9 @@ pkgs.stdenv.mkDerivation {
   name = "urbit";
   src = ../vendor/urbit;
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
-  NIX_LDFLAGS = flags;
+  # NIX_LDFLAGS = flags;
+  # postInstall = ''
+  #   mkdir -p $out/bin
+  #   cp ./urbit $out/bin/
+  # '';
 }
