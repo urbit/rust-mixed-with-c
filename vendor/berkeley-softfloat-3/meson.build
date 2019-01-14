@@ -323,7 +323,7 @@ lib = static_library('softfloat3', sources: common_src + src_8080sse,
     '-DINLINE_LEVEL=5',
     '-DSOFTFLOAT_FAST_DIV32TO16',
     '-DSOFTFLOAT_FAST_DIV64TO32'],
- install: false
+ install: true
     )
 softfloat3_dep = declare_dependency(include_directories : incdir,
       link_with : lib)
