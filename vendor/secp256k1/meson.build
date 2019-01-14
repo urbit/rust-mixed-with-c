@@ -33,6 +33,6 @@ lib = static_library('secp256k1',
 			  # '-DUSE_SCALAR_4X64'
 		],
 		# , '-DHAVE_CONFIG_H', '-DSECP256K1_BUILD' ],
-	install: false)
+	install: true)
 
 secp256k1_dep = declare_dependency(include_directories : include_dirs, link_with : lib)

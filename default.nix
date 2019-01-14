@@ -21,6 +21,7 @@ rec {
   sniproxy             = import ./nix/sniproxy.nix             { inherit pkgs; };
   libscrypt            = import ./nix/libscrypt.nix            { inherit pkgs; };
   berkeley-softfloat-3 = import ./nix/berkeley-softfloat-3.nix { inherit pkgs; };
+  secp256k1            = import ./nix/secp256k1.nix            { inherit pkgs; };
 
   minima =
     pkgs.stdenv.mkDerivation {
