@@ -18,7 +18,7 @@ rec {
   murmur3              = import ./nix/murmur3.nix              { inherit pkgs; };
   libuv                = import ./nix/libuv.nix                { inherit pkgs; };
   ed25519              = import ./nix/ed25519.nix              { inherit pkgs; };
-  sniproxy             = import ./nix/sniproxy.nix             { inherit pkgs; };
+  libsni               = import ./nix/libsni                   { inherit pkgs; };
   libscrypt            = import ./nix/libscrypt.nix            { inherit pkgs; };
   berkeley-softfloat-3 = import ./nix/berkeley-softfloat-3.nix { inherit pkgs; };
   secp256k1            = import ./nix/secp256k1.nix            { inherit pkgs; };
@@ -26,7 +26,8 @@ rec {
 
   urbit =
     import ./nix/urbit.nix {
-      inherit pkgs argon2 murmur3 libuv ed25519 sniproxy libscrypt;
+      inherit pkgs;
+      inherit argon2 murmur3 libuv ed25519 libsni libscrypt;
       inherit berkeley-softfloat-3 secp256k1 h2o;
     };
 

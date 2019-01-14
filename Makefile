@@ -1,10 +1,10 @@
-PKGS = vendor/sniproxy pkg/minima pkg/extrema pkg/rusthello pkg/prog
+PKGS = minima extrema rusthello prog
 
 build:
-	for x in ${PKGS}; do (cd $$x; make install); done
+	for x in ${PKGS}; do (cd pkg/$$x; make install); done
 
 test:
-	for x in ${PKGS}; do (cd $$x; make install test); done
+	for x in ${PKGS}; do (cd pkg/$$x; make install test); done
 
 clean:
 	rm -rf ./out ./work
