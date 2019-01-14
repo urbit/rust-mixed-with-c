@@ -28,13 +28,12 @@
 
     int ret;
     c3_y out_y[64];
-
-    // ret = blake2b(out_y,  // OUT: output
-    //               out,    // IN: max output size
-    //               dat_y,  // IN: msg body
-    //               wid,    // IN: msg len
-    //               dak_y,  // IN: key body
-    //               wik);   // IN: key len
+    ret = blake2b(out_y,  // OUT: output
+                  out,    // IN: max output size
+                  dat_y,  // IN: msg body
+                  wid,    // IN: msg len
+                  dak_y,  // IN: key body
+                  wik);   // IN: key len
 
     /* free() BEFORE checking error code;
        we don't want to leak memory if we return early

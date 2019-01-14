@@ -14,9 +14,11 @@ all: reference
 
 OBJS= crypto_scrypt-nosse.o sha256.o crypto-mcf.o b64.o crypto-scrypt-saltgen.o crypto_scrypt-check.o crypto_scrypt-hash.o slowequals.o
 
-libscrypt.so.0: $(OBJS) 
+libscrypt.so.0: $(OBJS)
 	$(CC) $(LDFLAGS) -shared -o libscrypt.so.0  $(OBJS) -lm -lc
-	ar rcs libscrypt.a  $(OBJS)
+
+libscrypt.a: $(OBJS)
+	ar rcs libscrypt.a $(OBJS)
 
 reference: libscrypt.so.0 main.o crypto_scrypt-hexconvert.o
 	ln -s -f libscrypt.so.0 libscrypt.so
@@ -41,7 +43,9 @@ asan: main.c
 	./asantest
 	rm -f asantest
 
-install: libscrypt.so.0
+install: install-static
+
+install-shared: libscrypt.so.0
 	$(MAKE_DIR) $(DESTDIR) $(DESTDIR)$(PREFIX) $(DESTDIR)$(LIBDIR) $(DESTDIR)$(INCLUDEDIR)
 	$(INSTALL_DATA) -pm 0755 libscrypt.so.0 $(DESTDIR)$(LIBDIR)
 	cd $(DESTDIR)$(LIBDIR) && ln -s -f libscrypt.so.0 $(DESTDIR)$(LIBDIR)/libscrypt.so
@@ -55,4 +59,6 @@ install-osx: libscrypt.so.0
 	$(INSTALL_DATA) -pm 0644 libscrypt.h  $(DESTDIR)$(INCLUDEDIR)
 
 install-static: libscrypt.a
+	$(MAKE_DIR) $(DESTDIR) $(DESTDIR)$(PREFIX) $(DESTDIR)$(LIBDIR) $(DESTDIR)$(INCLUDEDIR)
 	$(INSTALL_DATA) -pm 0644 libscrypt.a $(DESTDIR)$(LIBDIR)
+	$(INSTALL_DATA) -pm 0644 libscrypt.h  $(DESTDIR)$(INCLUDEDIR)

@@ -245,6 +245,7 @@ osdet = host_machine.system()
 cc = meson.get_compiler('c')
 os_c_flags = ['-funsigned-char','-ffast-math']
 os_deps = [dependency('threads')]
+
 os_link_flags = []
 
 if osdet == 'linux'
