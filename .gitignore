@@ -1,0 +1,8 @@
+*.o
+*.so
+*.so.0
+*.a
+reference
+endian.h
+byteorder
+build/
