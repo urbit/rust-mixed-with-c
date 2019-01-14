@@ -112,7 +112,7 @@ HEADERS = include/argon2.h
 INSTALL = install
 
 DESTDIR =
-PREFIX = /usr
+PREFIX = ${out}
 INCLUDE_REL = include
 LIBRARY_REL = lib
 BINARY_REL = bin

@@ -24,6 +24,12 @@ rec {
   secp256k1            = import ./nix/secp256k1.nix            { inherit pkgs; };
   h2o                  = import ./nix/h2o.nix                  { inherit pkgs libuv; };
 
+  urbit =
+    import ./nix/urbit.nix {
+      inherit pkgs argon2 murmur3 libuv ed25519 sniproxy libscrypt;
+      inherit berkeley-softfloat-3 secp256k1 h2o;
+    };
+
   minima =
     pkgs.stdenv.mkDerivation {
       name = "minima";

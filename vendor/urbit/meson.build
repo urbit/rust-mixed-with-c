@@ -318,9 +318,9 @@ elif osdet != 'openbsd'
 endif
 
 # For these libs we provide fallback bundle
-argon2_dep = dependency('argon2', version: '>=1', fallback: ['argon2', 'argon2_dep'])
-ed25519_dep = dependency('ed25519', version: '>=0.1.0', fallback: ['ed25519', 'ed25519_dep'])
-libh2o_dep = dependency('libh2o', version: '>=0.13.3', fallback: ['libh2o', 'libh2o_dep'])
+argon2_dep = cc.find_library('argon2')
+ed25519_dep = cc.find_library('ed25519')
+libh2o_dep = dependency('libh2o')
 libscrypt_dep = dependency('libscrypt', version: '>=0.1.21', fallback: ['libscrypt', 'libscrypt_dep'])
 libsni_dep = dependency('libsni', version: '>=0.5.0', fallback: ['libsni', 'libsni_dep'])
 libuv_dep = dependency('libuv', version: '>=1.8.0', fallback:['libuv', 'libuv_dep'])

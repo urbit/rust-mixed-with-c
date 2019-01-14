@@ -2,6 +2,6 @@
 
 pkgs.stdenv.mkDerivation rec {
   name              = "libscrypt";
-  nativeBuildInputs = with pkgs; [ meson ninja pkgconfig ];
+  nativeBuildInputs = with pkgs; [ pkgconfig autoconf automake libtool ];
   src               = ../vendor/libscrypt;
 }
