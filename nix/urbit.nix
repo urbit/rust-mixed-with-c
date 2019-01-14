@@ -5,6 +5,10 @@
 
 let
 
+  buildenv = with pkgs; [ meson ninja pkgconfig libtool ];
+
+  deps = with pkgs; [ curl gmp libscrypt libsigsegv ncurses openssl re2c zlib ];
+
   osx =
     with pkgs;
     lib.optionals stdenv.isDarwin (
@@ -12,18 +16,11 @@ let
         [ Cocoa CoreServices ]);
 
   vendor = [
-    # argon2 murmur3 libuv ed25519 sniproxy libscrypt berkeley-softfloat-3
-    argon2 murmur3 libuv ed25519 sniproxy berkeley-softfloat-3
-    secp256k1 # h2o
+    argon2 berkeley-softfloat-3 ed25519 h2o libscrypt libuv murmur3
+    secp256k1 sniproxy
   ];
 
-  buildenv = with pkgs; [ meson ninja pkgconfig libtool ];
-
-  # ps = with pkgs; [ curl gcc gmp libsigsegv ncurses zlib re2c openssl libscrypt ];
-
-  deps = with pkgs; [ curl gmp libsigsegv ncurses libscrypt h2o ];
-
-  ldflags =
+  flags =
      with pkgs;
      lib.optionalString stdenv.isDarwin "-framework CoreServices";
 
@@ -32,6 +29,6 @@ in
 pkgs.stdenv.mkDerivation {
   name = "urbit";
   src = ../vendor/urbit;
-  buildInputs = osx ++ buildenv ++ vendor ++ deps;
-  NIX_LDFLAGS = ldflags;
+  nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
+  NIX_LDFLAGS = flags;
 }

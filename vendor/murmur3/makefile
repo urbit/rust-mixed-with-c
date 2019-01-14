@@ -10,11 +10,11 @@ tests: test.o murmur3.o
 
 shared: murmur3.c murmur3.h
 	$(CC) -fPIC -O3 -c murmur3.c
-	$(CC) -shared -Wl,--export-dynamic murmur3.o -o libmurmur3.so
+	$(AR) rcs libmurmur3.a murmur3.o
 
 install: shared
 	mkdir ${out}/lib
-	cp libmurmur3.so ${out}/lib
+	cp libmurmur3.a ${out}/lib
 
 clean:
 	rm -rf example *.o *.so

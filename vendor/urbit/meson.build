@@ -320,13 +320,13 @@ endif
 # For these libs we provide fallback bundle
 argon2_dep = cc.find_library('argon2')
 ed25519_dep = cc.find_library('ed25519')
+libuv_dep = dependency('libuv')
+murmur3_dep = cc.find_library('murmur3')
+secp256k1_dep = dependency('libsecp256k1')
+softfloat3_dep = dependency('softfloat3')
 libh2o_dep = dependency('libh2o')
-libscrypt_dep = dependency('libscrypt', version: '>=0.1.21', fallback: ['libscrypt', 'libscrypt_dep'])
-libsni_dep = dependency('libsni', version: '>=0.5.0', fallback: ['libsni', 'libsni_dep'])
-libuv_dep = dependency('libuv', version: '>=1.8.0', fallback:['libuv', 'libuv_dep'])
-murmur3_dep = dependency('murmur3', version: '>=0.1.0', fallback: ['murmur3', 'murmur3_dep'])
-secp256k1_dep = dependency('libsecp256k1', version: '>=0.1.0', fallback: ['secp256k1', 'secp256k1_dep'])
-softfloat3_dep = dependency('softfloat3', version: '>=3.0.0', fallback: ['softfloat3', 'softfloat3_dep'])
+libscrypt_dep = dependency('libscrypt')
+libsni_dep = dependency('libsni')
 
 deps = [argon2_dep,
         curl_dep,
