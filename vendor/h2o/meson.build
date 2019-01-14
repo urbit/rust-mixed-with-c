@@ -114,8 +114,7 @@ inc = include_directories([
   './deps/yoml'
 ])
 
-libuv_dep = dependency('libuv', version: '>=1.8.0',
-                       fallback:['libuv', 'libuv_dep'])
+libuv_dep = dependency('libuv')
 zlib_dep = dependency('zlib')
 
 os_deps = []
@@ -148,7 +147,11 @@ else
   openssl_dep = dependency('openssl', version: '>=1.0.0')
 endif
 
-lib = static_library('h2o', sources: lib_src, version: version, install: false,
+lib = static_library(
+  'h2o',
+  sources: lib_src,
+  version: version,
+  install: true,
   include_directories: inc,
   c_args: ['-Wall', '-Wno-unused-value', '-Wno-unused-function'],
   dependencies: os_deps + [libuv_dep, zlib_dep, openssl_dep],

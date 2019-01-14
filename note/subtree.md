@@ -7,4 +7,5 @@ git subtree add --prefix=vendor/sniproxy --squash git@github.com:urbit/sniproxy.
 git subtree add --prefix=vendor/libscrypt --squash git@github.com:urbit/libscrypt.git master
 git subtree add --prefix=vendor/berkeley-softfloat-3 --squash git@github.com:urbit/berkeley-softfloat-3.git master
 git subtree add --prefix=vendor/secp256k1 --squash git@github.com:urbit/secp256k1.git master
+git subtree add --prefix=vendor/h2o --squash git@github.com:urbit/h2o.git urbit
 ```
