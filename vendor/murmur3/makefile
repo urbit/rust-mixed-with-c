@@ -12,5 +12,9 @@ shared: murmur3.c murmur3.h
 	$(CC) -fPIC -O3 -c murmur3.c
 	$(CC) -shared -Wl,--export-dynamic murmur3.o -o libmurmur3.so
 
+install: shared
+	mkdir ${out}/lib
+	cp libmurmur3.so ${out}/lib
+
 clean:
 	rm -rf example *.o *.so
