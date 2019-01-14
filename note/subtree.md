@@ -4,4 +4,5 @@ git subtree add --prefix=vendor/murmur3 --squash git@github.com:urbit/murmur3.gi
 git subtree add --prefix=vendor/libuv --squash git@github.com:urbit/libuv.git urbit
 git subtree add --prefix=vendor/ed25519 --squash git@github.com:urbit/ed25519.git master
 git subtree add --prefix=vendor/sniproxy --squash git@github.com:urbit/sniproxy.git urbit
+git subtree add --prefix=vendor/libscrypt --squash git@github.com:urbit/libscrypt.git master
 ```
