@@ -10,7 +10,7 @@ let
 
   vendor =
     with top; [
-      argon2 murmur3 libuv ed25519 sniproxy libscrypt berkeley-softfloat-3
+      argon2 murmur3 libuv ed25519 libsni libscrypt berkeley-softfloat-3
       secp256k1 h2o urbit
     ];
 

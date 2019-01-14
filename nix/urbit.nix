@@ -1,5 +1,5 @@
 {
-  pkgs, argon2, murmur3, libuv, ed25519, sniproxy, libscrypt,
+  pkgs, argon2, murmur3, libuv, ed25519, sni, libscrypt,
   berkeley-softfloat-3, secp256k1, h2o
 }:
 
@@ -17,7 +17,7 @@ let
 
   vendor = [
     argon2 berkeley-softfloat-3 ed25519 h2o libscrypt libuv murmur3
-    secp256k1 sniproxy
+    secp256k1 sni
   ];
 
   flags =
@@ -31,9 +31,5 @@ pkgs.stdenv.mkDerivation {
   name = "urbit";
   src = ../vendor/urbit;
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
-  # NIX_LDFLAGS = flags;
-  # postInstall = ''
-  #   mkdir -p $out/bin
-  #   cp ./urbit $out/bin/
-  # '';
+  NIX_LDFLAGS = flags;
 }
