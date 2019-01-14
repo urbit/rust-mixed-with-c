@@ -2,8 +2,8 @@
 **
 */
 #include "all.h"
-#include "../include/secp256k1.h"
-#include "../include/secp256k1_recovery.h"
+#include <secp256k1.h>
+#include <secp256k1_recovery.h>
 
 /* util funcs
  */

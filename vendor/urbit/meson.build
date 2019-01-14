@@ -322,11 +322,11 @@ argon2_dep = cc.find_library('argon2')
 ed25519_dep = cc.find_library('ed25519')
 libuv_dep = dependency('libuv')
 murmur3_dep = cc.find_library('murmur3')
-secp256k1_dep = dependency('libsecp256k1')
-softfloat3_dep = dependency('softfloat3')
-libh2o_dep = dependency('libh2o')
-libscrypt_dep = dependency('libscrypt')
-libsni_dep = dependency('libsni')
+secp256k1_dep = cc.find_library('secp256k1')
+softfloat3_dep = cc.find_library('softfloat3')
+libsni_dep = cc.find_library('sni')
+libscrypt_dep = cc.find_library('scrypt')
+libh2o_dep = cc.find_library('h2o')
 
 deps = [argon2_dep,
         curl_dep,

@@ -1,4 +1,4 @@
-PREFIX       ?= /usr/local
+PREFIX       ?= ${out}
 LIBDIR       ?= $(PREFIX)/lib
 INCLUDEDIR   ?= $(PREFIX)/include
 MAKE_DIR     ?= install -d

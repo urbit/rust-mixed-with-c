@@ -13,8 +13,10 @@ shared: murmur3.c murmur3.h
 	$(AR) rcs libmurmur3.a murmur3.o
 
 install: shared
-	mkdir ${out}/lib
+	mkdir -p ${out}/lib
 	cp libmurmur3.a ${out}/lib
+	mkdir -p ${out}/include
+	cp murmur3.h ${out}/include
 
 clean:
 	rm -rf example *.o *.so
