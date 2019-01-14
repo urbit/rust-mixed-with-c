@@ -101,7 +101,7 @@ lib = static_library('uv', sources: src,
  dependencies : os_deps,
  version: version,
  c_args: os_c_flags,
- install: false)
+ install: true)
 
 libuv_dep = declare_dependency(include_directories : incdir,
       link_with : lib)
