@@ -14,6 +14,8 @@ in
 rec {
   inherit pkgs;
 
+  argon2 = import ./nix/argon2.nix { inherit pkgs; };
+
   minima =
     pkgs.stdenv.mkDerivation {
       name = "minima";
