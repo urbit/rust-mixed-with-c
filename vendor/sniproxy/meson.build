@@ -8,7 +8,7 @@ inc = include_directories('src/')
 lib = static_library('sni', sources: sources, version: version,
 include_directories : inc,
 c_args: ['-Wall', '-ffast-math'],
-install: false)
+install: true)
 
 libsni_dep = declare_dependency(include_directories : inc,
   link_with : lib)
