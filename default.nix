@@ -17,6 +17,7 @@ rec {
   argon2  = import ./nix/argon2.nix  { inherit pkgs; };
   murmur3 = import ./nix/murmur3.nix { inherit pkgs; };
   libuv   = import ./nix/libuv.nix   { inherit pkgs; };
+  ed25519 = import ./nix/ed25519.nix { inherit pkgs; };
 
   minima =
     pkgs.stdenv.mkDerivation {
