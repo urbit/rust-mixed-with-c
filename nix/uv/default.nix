@@ -10,16 +10,17 @@ let
 
   autotools =
     with pkgs;
-    [pkgconfig autoconf automake libtool gnumake];
+    [ pkgconfig autoconf automake libtool gnumake ];
 
 in
 
 pkgs.stdenv.mkDerivation rec {
-  name              = "libuv";
-  nativeBuildInputs = autotools ++ osxBuildInputs;
-  src               = ../../vendor/libuv;
-
-  preConfigure = ''
-    LIBTOOLIZE=libtoolize ./autogen.sh
-  '';
+  name = "uv-64294";
+  buildInputs = autotools ++ osxBuildInputs;
+  builder = ./builder.sh;
+  src = builtins.fetchGit {
+    name = "uv-64294-git";
+    url = https://github.com/urbit/libuv.git;
+    rev = "6429495dc9a80aaf1c243038b381451f12bc7dcf";
+  };
 }
