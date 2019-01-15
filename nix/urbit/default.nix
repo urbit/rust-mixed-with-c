@@ -28,7 +28,7 @@ in
 
 pkgs.stdenv.mkDerivation {
   name = "urbit";
-  src = ../../vendor/urbit;
+  src = ../../pkg/urbit;
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
   NIX_LDFLAGS = flags;
 }
