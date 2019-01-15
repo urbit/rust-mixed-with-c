@@ -14,15 +14,15 @@ in
 rec {
   inherit pkgs;
 
-  argon2     = import ./nix/argon2        { inherit pkgs; };
-  murmur3    = import ./nix/murmur3       { inherit pkgs; };
-  libuv      = import ./nix/libuv.nix     { inherit pkgs; };
-  ed25519    = import ./nix/ed25519       { inherit pkgs; };
-  sni        = import ./nix/sni           { inherit pkgs; };
-  scrypt     = import ./nix/scrypt        { inherit pkgs; };
-  softfloat3 = import ./nix/softfloat3    { inherit pkgs; };
-  secp256k1  = import ./nix/secp256k1.nix { inherit pkgs; };
-  h2o        = import ./nix/h2o.nix       { inherit pkgs libuv; };
+  argon2     = import ./nix/argon2     { inherit pkgs; };
+  murmur3    = import ./nix/murmur3    { inherit pkgs; };
+  libuv      = import ./nix/libuv.nix  { inherit pkgs; };
+  ed25519    = import ./nix/ed25519    { inherit pkgs; };
+  sni        = import ./nix/sni        { inherit pkgs; };
+  scrypt     = import ./nix/scrypt     { inherit pkgs; };
+  softfloat3 = import ./nix/softfloat3 { inherit pkgs; };
+  secp256k1  = import ./nix/secp256k1  { inherit pkgs; };
+  h2o        = import ./nix/h2o.nix    { inherit pkgs libuv; };
 
   urbit =
     import ./nix/urbit.nix {
