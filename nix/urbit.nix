@@ -1,6 +1,6 @@
 {
-  pkgs, argon2, murmur3, libuv, ed25519, sni, libscrypt,
-  berkeley-softfloat-3, secp256k1, h2o
+  pkgs, argon2, murmur3, libuv, ed25519, sni, libscrypt, softfloat3,
+  secp256k1, h2o
 }:
 
 let
@@ -16,8 +16,7 @@ let
         [ Cocoa CoreServices ]);
 
   vendor = [
-    argon2 berkeley-softfloat-3 ed25519 h2o libscrypt libuv murmur3
-    secp256k1 sni
+    argon2 softfloat3 ed25519 h2o libscrypt libuv murmur3 secp256k1 sni
   ];
 
   flags =

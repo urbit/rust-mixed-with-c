@@ -8,3 +8,4 @@ test:
 
 clean:
 	rm -rf ./out ./work
+	rm -f result result-*
