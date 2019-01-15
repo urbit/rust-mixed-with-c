@@ -4,7 +4,7 @@ pkgs.stdenv.mkDerivation rec {
   name = "secp256k1-b4e87";
   builder = ./builder.sh;
   buildInputs = [ pkgs.gmp ];
-  nativeBuildInputs = [ pkgs.meson pkgs.ninja pkgs.pkgconfig ];
+  nativeBuildInputs = with pkgs; [pkgconfig autoconf automake libtool gnumake];
   src = builtins.fetchGit {
     name = "secp256k1-b4e87-git";
     url = https://github.com/urbit/secp256k1.git;
