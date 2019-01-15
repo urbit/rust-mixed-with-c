@@ -14,7 +14,7 @@ in
 rec {
   inherit pkgs;
 
-  argon2     = import ./nix/argon2.nix    { inherit pkgs; };
+  argon2     = import ./nix/argon2        { inherit pkgs; };
   murmur3    = import ./nix/murmur3.nix   { inherit pkgs; };
   libuv      = import ./nix/libuv.nix     { inherit pkgs; };
   ed25519    = import ./nix/ed25519       { inherit pkgs; };
