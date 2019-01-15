@@ -1,15 +1,8 @@
 { pkgs, uv }:
 
-let
-
-  buildInputs =
-    [ uv ] ++ (with pkgs; [ meson ninja pkgconfig zlib openssl ]);
-
-in
-
 pkgs.stdenv.mkDerivation rec {
   name = "h2o-0ed9a";
-  nativeBuildInputs = buildInputs;
+  buildInputs = [ uv pkgs.openssl pkgs.zlib ];
   builder = ./builder.sh;
   src = builtins.fetchGit {
     name = "h2o-0ed9a-git";
