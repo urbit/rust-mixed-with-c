@@ -17,7 +17,7 @@ in
 pkgs.stdenv.mkDerivation rec {
   name              = "libuv";
   nativeBuildInputs = autotools ++ osxBuildInputs;
-  src               = ../vendor/libuv;
+  src               = ../../vendor/libuv;
 
   preConfigure = ''
     LIBTOOLIZE=libtoolize ./autogen.sh

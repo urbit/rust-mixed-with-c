@@ -16,18 +16,18 @@ rec {
 
   argon2     = import ./nix/argon2     { inherit pkgs; };
   murmur3    = import ./nix/murmur3    { inherit pkgs; };
-  libuv      = import ./nix/libuv.nix  { inherit pkgs; };
+  uv         = import ./nix/uv         { inherit pkgs; };
   ed25519    = import ./nix/ed25519    { inherit pkgs; };
   sni        = import ./nix/sni        { inherit pkgs; };
   scrypt     = import ./nix/scrypt     { inherit pkgs; };
   softfloat3 = import ./nix/softfloat3 { inherit pkgs; };
   secp256k1  = import ./nix/secp256k1  { inherit pkgs; };
-  h2o        = import ./nix/h2o.nix    { inherit pkgs libuv; };
+  h2o        = import ./nix/h2o        { inherit pkgs uv; };
 
   urbit =
-    import ./nix/urbit.nix {
+    import ./nix/urbit {
       inherit pkgs;
-      inherit argon2 murmur3 libuv ed25519 sni scrypt softfloat3;
+      inherit argon2 murmur3 uv ed25519 sni scrypt softfloat3;
       inherit secp256k1 h2o;
     };
 
