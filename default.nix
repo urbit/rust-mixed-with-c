@@ -19,7 +19,7 @@ rec {
   libuv      = import ./nix/libuv.nix     { inherit pkgs; };
   ed25519    = import ./nix/ed25519       { inherit pkgs; };
   sni        = import ./nix/sni           { inherit pkgs; };
-  libscrypt  = import ./nix/libscrypt.nix { inherit pkgs; };
+  scrypt     = import ./nix/scrypt        { inherit pkgs; };
   softfloat3 = import ./nix/softfloat3    { inherit pkgs; };
   secp256k1  = import ./nix/secp256k1.nix { inherit pkgs; };
   h2o        = import ./nix/h2o.nix       { inherit pkgs libuv; };
@@ -27,8 +27,8 @@ rec {
   urbit =
     import ./nix/urbit.nix {
       inherit pkgs;
-      inherit argon2 murmur3 libuv ed25519 sni libscrypt;
-      inherit softfloat3 secp256k1 h2o;
+      inherit argon2 murmur3 libuv ed25519 sni scrypt softfloat3;
+      inherit secp256k1 h2o;
     };
 
   minima =
