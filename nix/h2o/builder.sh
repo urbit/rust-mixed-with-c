@@ -83,12 +83,6 @@ sources=" \
 "
 
 CFLAGS=" \
-  -Wall \
-  -Wno-unused-value \
-  -Wno-unused-but-set-variable \
-  -Wno-unused-result \
-  -Wno-implicit-function-declaration \
-  -Wno-unused-function \
   -I$src/include \
   -I$src/deps/cloexec \
   -I$src/deps/brotli/enc \
