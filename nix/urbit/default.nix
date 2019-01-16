@@ -7,7 +7,9 @@ let
 
   buildenv = with pkgs; [ meson ninja pkgconfig libtool ];
 
-  deps = with pkgs; [ curl gmp scrypt libsigsegv ncurses openssl re2c zlib ];
+  deps =
+    with pkgs;
+    [ curl gmp scrypt libsigsegv ncurses openssl re2c zlib ];
 
   osx =
     with pkgs;

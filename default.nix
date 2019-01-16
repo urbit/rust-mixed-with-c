@@ -2,9 +2,9 @@ let
 
   nixpkgs =
     builtins.fetchGit {
-      name = "nixpkgs-2018-11-13";
+      name = "nixpkgs-2019-01-15";
       url = https://github.com/nixos/nixpkgs/;
-      rev = "695a3d4254545968fc3015142c5299c0da5ca0a9";
+      rev = "368b72a71dee920c79d98b27b524d62550a347ec";
     };
 
 in
