@@ -20,12 +20,17 @@ let
 
   vendor =
     with tlon;
-    [ argon2 ed25519 h2o murmur3 scrypt secp256k1 sni softfloat3 uv nodehello ];
+    [ argon2 ed25519 h2o murmur3 scrypt secp256k1 sni softfloat3 uv ];
+
+  exe =
+    with tlon;
+    [ nodehello vere-tests ];
+    [ urbit nodehello vere-tests ];
 
 in
 pkgs.stdenv.mkDerivation rec {
   name        = "env";
   env         = pkgs.buildEnv { name = name; paths = buildInputs; };
-  buildInputs = tools ++ libs ++ osx ++ vendor;
+  buildInputs = tools ++ libs ++ osx ++ vendor ++ exe;
 # shellHook   = "unset NIX_LDFLAGS out LDFLAGS CFLAGS TMP";
 }

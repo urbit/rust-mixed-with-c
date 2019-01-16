@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 var fs      = require('fs')
@@ -6,7 +8,12 @@ var Urbit   = runner.Urbit;
 var ERROR   = runner.ERROR;
 var actions = runner.actions
 
-var hash  = fs.readFileSync('./pin-arvo-commit.txt', 'utf-8').slice(0, 10)
+require.extensions['.txt'] = function (module, filename) {
+    module.exports = fs.readFileSync(filename, 'utf8');
+};
+
+var hash  = require('./pin-arvo-commit.txt').slice(0,10)
+
 var pill  = 'https://bootstrap.urbit.org/git-' + hash + '.pill'
 
 var args  = ['-u', pill, '-cgPSF', 'zod', 'zod'];

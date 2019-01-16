@@ -2,9 +2,7 @@
   "name": "vere-tests",
   "version": "1.0.0",
   "description": "Test harness for the Urbit runtime",
-  "scripts": {
-    "test": "node test.js"
-  },
+  "bin": "test.js",
   "private": true,
   "author": "~fyr",
   "license": "MIT",
