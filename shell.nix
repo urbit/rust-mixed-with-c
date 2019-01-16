@@ -1,17 +1,16 @@
 let
 
-  top = import ./. {};
+  tlon = import ./. {};
 
-  pkgs = top.pkgs;
+  pkgs = tlon.pkgs;
 
-  deps =
+  tools =
     with pkgs;
-    [ cargo rustc openssl zlib pkgconfig libtool meson ninja
-      curl gmp scrypt libsigsegv ncurses openssl re2c zlib ];
+    [ cargo rustc meson ninja pkgconfig libtool ];
 
-  vendor =
-    with top;
-    [ argon2 ed25519 h2o murmur3 scrypt secp256k1 sni softfloat3 uv ];
+  libs =
+    with pkgs;
+    [ openssl zlib curl gmp scrypt libsigsegv ncurses openssl re2c zlib ];
 
   osx =
     with pkgs;
@@ -19,10 +18,14 @@ let
       with darwin.apple_sdk.frameworks;
       [ Cocoa CoreServices ]);
 
+  vendor =
+    with tlon;
+    [ argon2 ed25519 h2o murmur3 scrypt secp256k1 sni softfloat3 uv nodehello ];
+
 in
 pkgs.stdenv.mkDerivation rec {
   name        = "env";
   env         = pkgs.buildEnv { name = name; paths = buildInputs; };
-  buildInputs = osx ++ deps ++ vendor;
-  # shellHook   = "unset NIX_LDFLAGS out LDFLAGS CFLAGS TMP";
+  buildInputs = tools ++ libs ++ osx ++ vendor;
+# shellHook   = "unset NIX_LDFLAGS out LDFLAGS CFLAGS TMP";
 }
