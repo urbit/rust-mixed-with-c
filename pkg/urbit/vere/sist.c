@@ -1,18 +1,13 @@
 /* vere/sist.c
 **
 */
+#include <ent.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <uv.h>
 
 #include "all.h"
 #include "vere/vere.h"
-
-#if defined(U3_OS_linux)
-#define DEVRANDOM "/dev/urandom"
-#else
-#define DEVRANDOM "/dev/random"
-#endif
 
 /* u3_sist_pack(): write a blob to disk, transferring.
 */
@@ -412,18 +407,10 @@ _sist_bask(c3_c* pop_c, u3_noun may)
 void
 c3_rand(c3_w* rad_w)
 {
-#if defined(U3_OS_bsd) && defined(__OpenBSD__)
-  if (-1 == getentropy(rad_w, 64)) {
-    c3_assert(!"lo_rand");
+  if ( 0 != ent_getentropy(rad_w, 64) ) {
+    uL(fprintf(uH, "c3_rand getentropy: %s\n", strerror(errno)));
+    u3_lo_bail();
   }
-#else
-  c3_i fid_i = open(DEVRANDOM, O_RDONLY);
-
-  if ( 64 != read(fid_i, (c3_y*) rad_w, 64) ) {
-    c3_assert(!"lo_rand");
-  }
-  close(fid_i);
-#endif
 }
 
 /* _sist_fast(): offer to save passcode by mug in home directory.
@@ -697,7 +684,10 @@ _sist_rest_nuu(u3_ulog* lug_u, u3_uled led_u, c3_c* old_c)
       lar_u.ent_d = ent_d;
       lar_u.tem_w = 0;
       lar_u.typ_w = c3__ov;
-      lar_u.mug_w = u3r_mug_trel(ovo, u3_nul, c3__ov);
+
+      u3_noun moo = u3nt(u3k(ovo), u3_nul, c3__ov);
+      lar_u.mug_w = u3r_mug(moo);
+      u3z(moo);
 
       img_w = c3_malloc(lar_u.len_w << 2);
       u3r_words(0, lar_u.len_w, img_w, ovo);

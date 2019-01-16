@@ -244,7 +244,7 @@ conf_data.set('U3_EVENT_TIME_DEBUG', get_option('event-time'))
 osdet = host_machine.system()
 cc = meson.get_compiler('c')
 os_c_flags = ['-funsigned-char','-ffast-math']
-os_deps = [cc.find_library('pthread')]
+os_deps = [dependency('threads')]
 os_link_flags = []
 
 if osdet == 'linux'
@@ -291,85 +291,96 @@ else
   error('Little endian encoding required')
 endif
 
-configure_file(
-  input : 'include/config.h.in',
-  output : 'config.h',
-  configuration : conf_data,
-)
+configure_file(input : 'include/config.h.in',
+               output : 'config.h',
+               configuration : conf_data)
 
-argon2_dep     = cc.find_library('argon2')
-curl_dep       = dependency('libcurl')
-ed25519_dep    = cc.find_library('ed25519')
-gmp_dep        = cc.find_library('gmp')
-h2o_dep        = cc.find_library('h2o')
-murmur3_dep    = cc.find_library('murmur3')
-openssl_dep    = dependency('openssl')
-scrypt_dep     = cc.find_library('scrypt')
-secp256k1_dep  = cc.find_library('secp256k1')
-sigsegv_dep    = cc.find_library('sigsegv')
-sni_dep        = cc.find_library('sni')
-softfloat3_dep = cc.find_library('softfloat3')
-uv_dep         = cc.find_library('uv')
+# We expect these libs to supplied with the distribution
+curl_dep = dependency('libcurl', version: '>=7.19.0')
 
-deps = [
-  argon2_dep,
-  curl_dep,
-  ed25519_dep,
-  gmp_dep,
-  h2o_dep,
-  murmur3_dep,
-  openssl_dep,
-  scrypt_dep,
-  secp256k1_dep,
-  sigsegv_dep,
-  sni_dep,
-  softfloat3_dep,
-  uv_dep,
-]
+if (osdet == 'darwin' and not get_option('nix') and
+    run_command('test', '-d', '/usr/local/opt/openssl/lib').returncode() == 0)
+  libcrypto = cc.find_library('crypto', dirs: [ '/usr/local/opt/openssl/lib/' ])
+  libssl = cc.find_library('ssl', dirs: [ '/usr/local/opt/openssl/lib/' ])
+  openssl_dep = declare_dependency(dependencies: [libcrypto, libssl], include_directories: include_directories('/usr/local/opt/openssl/include'))
+else
+  openssl_dep = dependency('openssl', version: '>=1.0.0')
+endif
 
-executable(
-  'urbit',
-  sources: sources,
-  include_directories: incdir,
-  c_args: os_c_flags,
-  link_args: os_link_flags,
-  dependencies: deps + os_deps,
-  install: true,
-)
+if(legacy_meson)
+  gmp_dep = find_library('gmp')
+  sigsegv_dep = find_library('sigsegv')
+elif osdet != 'openbsd'
+  # XX on OS X with MacPorts, set LIBRARY_PATH=/opt/local/lib to get meson to
+  # find these.
+  gmp_dep = cc.find_library('gmp')
+  sigsegv_dep = cc.find_library('sigsegv')
+endif
+
+# For these libs we provide fallback bundle
+argon2_dep = dependency('argon2', version: '>=1', fallback: ['argon2', 'argon2_dep'])
+ed25519_dep = dependency('ed25519', version: '>=0.1.0', fallback: ['ed25519', 'ed25519_dep'])
+libent_dep = dependency('libent', version: '>=0.1.3', fallback: ['libent', 'libent_dep'])
+libh2o_dep = dependency('libh2o', version: '>=0.13.3', fallback: ['libh2o', 'libh2o_dep'])
+libscrypt_dep = dependency('libscrypt', version: '>=0.1.21', fallback: ['libscrypt', 'libscrypt_dep'])
+libsni_dep = dependency('libsni', version: '>=0.5.0', fallback: ['libsni', 'libsni_dep'])
+libuv_dep = dependency('libuv', version: '>=1.8.0', fallback:['libuv', 'libuv_dep'])
+murmur3_dep = dependency('murmur3', version: '>=0.1.0', fallback: ['murmur3', 'murmur3_dep'])
+secp256k1_dep = dependency('libsecp256k1', version: '>=0.1.0', fallback: ['secp256k1', 'secp256k1_dep'])
+softfloat3_dep = dependency('softfloat3', version: '>=3.0.0', fallback: ['softfloat3', 'softfloat3_dep'])
+
+deps = [argon2_dep,
+        curl_dep,
+        ed25519_dep,
+        gmp_dep,
+        libent_dep,
+        libh2o_dep,
+        libscrypt_dep,
+        libsni_dep,
+        libuv_dep,
+        murmur3_dep,
+        openssl_dep,
+        secp256k1_dep,
+        sigsegv_dep,
+        softfloat3_dep]
+
+executable('urbit',
+sources : sources,
+include_directories : incdir,
+c_args : os_c_flags,
+link_args: os_link_flags,
+dependencies: deps + os_deps,
+install: true)
 
 # XX shrink this list
 test_sources = noun_src + jets_all_src + vere_sans_main
 
-test_hashtable = executable(
-  'test-hashtable',
-  sources: test_sources + ['tests/hashtable_tests.c'],
-  include_directories: incdir,
-  c_args: os_c_flags,
-  link_args: os_link_flags,
-  dependencies: deps + os_deps,
-  install: false
-)
+test_hashtable = executable('test-hashtable',
+sources : test_sources + ['tests/hashtable_tests.c'],
+include_directories : incdir,
+c_args : os_c_flags,
+link_args: os_link_flags,
+dependencies: deps + os_deps,
+install: false)
 
 test('test-hashtable', test_hashtable)
 
 test_mem = executable('test-mem',
-sources: test_sources + ['tests/test.c'],
-include_directories: incdir,
-c_args: os_c_flags,
+sources : test_sources + ['tests/test.c'],
+include_directories : incdir,
+c_args : os_c_flags,
 link_args: os_link_flags,
 dependencies: deps + os_deps,
 install: false)
 
 test('test-mem', test_mem, should_fail: true)
 
-test_hash = executable(
-  'test-hash',
-  sources: test_sources + ['tests/hash_tests.c'],
-  include_directories: incdir,
-  c_args: os_c_flags,
-  link_args: os_link_flags,
-  dependencies: deps + os_deps,
-  install: false
-)
+test_hash = executable('test-hash',
+sources : test_sources + ['tests/hash_tests.c'],
+include_directories : incdir,
+c_args : os_c_flags,
+link_args: os_link_flags,
+dependencies: deps + os_deps,
+install: false)
 
-test('test_hash', test_hash)
+test('test-hash', test_hash)

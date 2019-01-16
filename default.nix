@@ -23,13 +23,14 @@ rec {
   softfloat3 = import ./nix/softfloat3 { inherit pkgs; };
   secp256k1  = import ./nix/secp256k1  { inherit pkgs; };
   h2o        = import ./nix/h2o        { inherit pkgs uv; };
+  ent        = import ./nix/ent        { inherit pkgs; };
   nodehello  = import ./nix/nodehello  { inherit pkgs; };
   vere-tests = import ./nix/vere-tests { inherit pkgs urbit; };
 
   urbit =
     import ./nix/urbit {
       inherit pkgs;
-      inherit argon2 murmur3 uv ed25519 sni scrypt softfloat3;
+      inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
       inherit secp256k1 h2o;
     };
 

@@ -1,6 +1,8 @@
 {
-  pkgs, argon2, murmur3, uv, ed25519, sni, scrypt, softfloat3,
-  secp256k1, h2o
+  pkgs,
+
+  argon2, ed25519, ent, h2o, murmur3, scrypt, secp256k1, sni, softfloat3,
+  uv
 }:
 
 let
@@ -18,7 +20,7 @@ let
         [ Cocoa CoreServices ]);
 
   vendor = [
-    argon2 softfloat3 ed25519 h2o scrypt uv murmur3 secp256k1 sni
+    argon2 softfloat3 ed25519 ent h2o scrypt uv murmur3 secp256k1 sni
   ];
 
   flags =
@@ -26,11 +28,17 @@ let
      lib.optionalString stdenv.isDarwin
        "-framework CoreServices -framework CoreFoundation";
 
+
 in
 
 pkgs.stdenv.mkDerivation {
-  name = "urbit";
-  src = ../../pkg/urbit;
+  name = "urbit-71a75";
+  patches = [ ./meson-build.patch ];
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
   NIX_LDFLAGS = flags;
+  src = builtins.fetchGit {
+    name = "urbit-31bdb-git";
+    url = https://github.com/urbit/urbit.git;
+    rev = "31bdb1cc3c3bf2850586497d21ff136e6dc1692e";
+  };
 }
