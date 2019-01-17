@@ -24,7 +24,6 @@ let
 
   exe =
     with tlon;
-    [ nodehello vere-tests ];
     [ urbit nodehello vere-tests ];
 
 in
