@@ -5,8 +5,13 @@ then echo 'CACHIX_AUTH_TOKEN must be set.' 1>&2
      exit 1
 fi
 
-cachix authtoken "$CACHIX_AUTH_TOKEN"
+if [ -z "$CI" ] || [ -z "$TRAVIS" ]
+then echo "Don't run this outside of CI. It will blow our cache"
+     exit 1
+fi
+
+cachix authtoken "$CACHIX_AUTH_TOKEN" >/dev/null
 cachix use urbit
-nix-build
-find /nix/store -maxdepth 1 | cachix push urbit
+nix-build | cachix push urbit
+nix-build nix/git-cache.nix | cachix push urbit
 nix-shell --pure --command ./sh/vere-tests
