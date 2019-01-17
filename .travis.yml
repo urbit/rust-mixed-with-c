@@ -1,4 +1,9 @@
 language: nix
 nix: 2.1.3
 install: nix-env -iA cachix -f https://cachix.org/api/v1/install
-script: ./sh/ci
+script:
+  - cachix authtoken "$CACHIX_AUTH_TOKEN" >/dev/null
+  - cachix use urbit
+  - nix-build nix/git-cache.nix | cachix push urbit
+  - nix-build | cachix push urbit
+  - nix-shell --pure --command ./sh/vere-tests
