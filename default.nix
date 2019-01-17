@@ -37,6 +37,9 @@ rec {
   rusthello =
     import ./nix/rusthello { inherit pkgs minima extrema; };
 
+  carnixhello =
+    import ./nix/carnixhello { inherit pkgs minima extrema; };
+
   minima =
     pkgs.stdenv.mkDerivation {
       name = "minima";
