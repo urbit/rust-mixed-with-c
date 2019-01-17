@@ -8,3 +8,7 @@ script:
   - nix-build nix/git-cache.nix | cachix push urbit
   - nix-build | cachix push urbit
   - nix-shell --pure --command ./sh/vere-tests
+
+cache:
+  directories:
+    - /home/travis/.cache/nix/tarballs
