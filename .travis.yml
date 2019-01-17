@@ -4,6 +4,7 @@ install: nix-env -iA cachix -f https://cachix.org/api/v1/install
 script:
   - cachix authtoken "$CACHIX_AUTH_TOKEN" >/dev/null
   - cachix use urbit
+  - nix-build -A minima # Test build times
   - nix-build nix/git-cache.nix | cachix push urbit
   - nix-build | cachix push urbit
   - nix-shell --pure --command ./sh/vere-tests
