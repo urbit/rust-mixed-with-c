@@ -26,6 +26,7 @@ rec {
   ent        = import ./nix/ent        { inherit pkgs; };
   nodehello  = import ./nix/nodehello  { inherit pkgs; };
   vere-tests = import ./nix/vere-tests { inherit pkgs urbit; };
+  arvo       = import ./nix/arvo       { inherit pkgs; };
 
   urbit =
     import ./nix/urbit {

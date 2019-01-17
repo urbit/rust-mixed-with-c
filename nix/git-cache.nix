@@ -14,4 +14,5 @@ with (import ../default.nix {});
   nodehello = nodehello.src;
   vere-tests = vere-tests.src;
   urbit = urbit.src;
+  arvo = arvo.src;
 }

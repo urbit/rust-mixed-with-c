@@ -32,14 +32,14 @@ let
 in
 
 pkgs.stdenv.mkDerivation {
-  name = "urbit-71a75";
+  name = "urbit-8b171";
   patches = [ ./meson-build.patch ];
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
   NIX_LDFLAGS = flags;
   src = pkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "urbit";
-    rev = "31bdb1cc3c3bf2850586497d21ff136e6dc1692e";
-    sha256 = "097k2m5hn2ilg0r1zj1g6vl4vm13rl5h1izjd534ciakpbys9lxr";
+    rev = "8b171941ca4332b3a0244fca43db457fd064e1b3";
+    sha256 = "0zjq9lkl754f5x22ifnv431cp3cd3ny5rrzq74qb1icvwbw27b7p";
   };
 }
