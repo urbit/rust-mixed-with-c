@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+if [ -z "$CACHIX_AUTH_TOKEN" ]
+then echo 'CACHIX_AUTH_TOKEN must be set.' 1>&2
+     exit 1
+fi
+
 cachix authtoken "$CACHIX_AUTH_TOKEN"
 cachix use urbit
-nix-build | cachix push urbit
+nix-build
+find /nix/store -maxdepth 1 | cachix push urbit
 nix-shell --pure --command ./sh/vere-tests
