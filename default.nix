@@ -34,6 +34,9 @@ rec {
       inherit secp256k1 h2o;
     };
 
+  rusthello =
+    import ./nix/rusthello { inherit pkgs minima extrema; };
+
   minima =
     pkgs.stdenv.mkDerivation {
       name = "minima";
@@ -45,17 +48,6 @@ rec {
       name = "extrema";
       buildInputs = [ minima ];
       src  = ./pkg/extrema;
-    };
-
-  rusthello =
-    pkgs.rustPlatform.buildRustPackage rec {
-      name = "rusthello";
-      src  = ./pkg/rusthello;
-      buildInputs = [ extrema minima ];
-      cargoSha256 = "1cgg3i06kqfqbwm8fbb2409qmlzdizm9hpg7p993swc25q2qmn3g";
-      postInstall = ''
-        cp -r ./include "$out"
-      '';
     };
 
   prog =
