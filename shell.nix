@@ -6,7 +6,7 @@ let
 
   tools =
     with pkgs;
-    [ cargo rustc meson ninja pkgconfig libtool ];
+    [ cargo rustc meson ninja pkgconfig libtool gdb ];
 
   libs =
     with pkgs;
