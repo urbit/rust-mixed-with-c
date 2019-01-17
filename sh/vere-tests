@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ulimit -c unlimited -S
+vere-tests
+bash ./pkg/vere-tests/print-core-backtrace.sh $?
