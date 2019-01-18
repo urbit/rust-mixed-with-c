@@ -16,6 +16,7 @@ rec {
   nodehello  = import ./pkg/nodehello  { inherit pkgs; };
   vere-tests = import ./pkg/vere-tests { inherit pkgs urbit; };
   arvo       = import ./pkg/arvo       { inherit pkgs; };
+  arvo-tests = import ./pkg/arvo-tests { inherit pkgs urbit arvo; };
 
   urbit =
     import ./pkg/urbit {

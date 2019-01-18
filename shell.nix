@@ -24,7 +24,7 @@ let
 
   exe =
     with tlon;
-    [ urbit nodehello vere-tests ];
+    [ urbit nodehello vere-tests arvo-tests ];
 
 in
 pkgs.stdenv.mkDerivation rec {
