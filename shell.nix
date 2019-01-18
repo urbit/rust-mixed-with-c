@@ -1,8 +1,8 @@
 let
 
-  tlon = import ./. {};
+  pkgs = import ./nix/nixpkgs.nix;
 
-  pkgs = tlon.pkgs;
+  tlon = import ./nix/tlon.nix { pkgs=pkgs; };
 
   tools =
     with pkgs;
@@ -24,12 +24,12 @@ let
 
   exe =
     with tlon;
-    [ urbit nodehello vere-tests arvo-tests ];
+    [ urbit nodehello vere-tests arvo-tests urbit-runner ];
 
 in
+
 pkgs.stdenv.mkDerivation rec {
   name        = "env";
   env         = pkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = tools ++ libs ++ osx ++ vendor ++ exe;
-# shellHook   = "unset NIX_LDFLAGS out LDFLAGS CFLAGS TMP";
 }
