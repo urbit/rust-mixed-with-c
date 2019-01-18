@@ -29,4 +29,6 @@ rec {
       inherit secp256k1 h2o;
     };
 
+  pill    = import ./pill;
+  fakezod = import ./fakezod { inherit pkgs urbit pill urbit-runner; };
 }
