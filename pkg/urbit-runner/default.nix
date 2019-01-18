@@ -1,14 +1,3 @@
-{
-  pkgs ? import ../../nix/nixpkgs.nix,
-  urbit
-}:
+{ pkgs ? import ../../nix/nixpkgs.nix }:
 
-let
-
-  pkg = (import ./npm { pkgs=pkgs; }).package;
-
-in
-
-pkg // {
-  buildInputs = pkg.buildInputs ++ [ urbit ];
-}
+(import ./npm { pkgs=pkgs; }).package

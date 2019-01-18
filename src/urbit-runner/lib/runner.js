@@ -21,7 +21,10 @@ function Urbit(args){
 
   console.log("starting vere with the following arguments:");
   console.log(args);
-  this.pty = pty.spawn('urbit', args);
+
+  var urbit = process.env.URBIT_EXE || 'urbit';
+
+  this.pty = pty.spawn(urbit, args);
 
   // XX pipe?
   this.pty.on('data', function(it){

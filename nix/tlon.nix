@@ -12,10 +12,10 @@ rec {
   h2o          = import ../pkg/h2o          { inherit pkgs uv; };
   ent          = import ../pkg/ent          { inherit pkgs; };
   nodehello    = import ../pkg/nodehello    { inherit pkgs; };
-  vere-tests   = import ../pkg/vere-tests   { inherit pkgs urbit; };
+  vere-tests   = import ../pkg/vere-tests   { inherit pkgs; };
   arvo         = import ../pkg/arvo         { inherit pkgs; };
-  arvo-tests   = import ../pkg/arvo-tests   { inherit pkgs urbit arvo; };
-  urbit-runner = import ../pkg/urbit-runner { inherit pkgs urbit; };
+  arvo-tests   = import ../pkg/arvo-tests   { inherit pkgs; };
+  urbit-runner = import ../pkg/urbit-runner { inherit pkgs; };
   rusthello    = import ../pkg/rusthello    { inherit pkgs minima extrema; };
   carnixhello  = import ../pkg/carnixhello  { inherit pkgs minima extrema; };
   minima       = import ../pkg/minima       { inherit pkgs; };
