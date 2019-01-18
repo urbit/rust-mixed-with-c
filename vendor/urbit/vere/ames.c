@@ -400,9 +400,12 @@ _ames_io_start()
 
     memset(&add_u, 0, sizeof(add_u));
     add_u.sin_family = AF_INET;
-    add_u.sin_addr.s_addr = _(u3_Host.ops_u.net) ?
-                              htonl(INADDR_ANY) :
-                              htonl(INADDR_LOOPBACK);
+    add_u.sin_addr.s_addr = _(u3_Host.ops_u.off)
+                          ? htonl(INADDR_NONE)
+                          : _(u3_Host.ops_u.net)
+                          ? htonl(INADDR_ANY)
+                          : htonl(INADDR_LOOPBACK);
+
     add_u.sin_port = htons(por_s);
 
     int ret;

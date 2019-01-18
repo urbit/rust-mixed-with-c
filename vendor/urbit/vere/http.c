@@ -985,9 +985,11 @@ _http_serv_start(u3_http* htp_u)
   memset(&adr_u, 0, sizeof(adr_u));
 
   adr_u.sin_family = AF_INET;
-  adr_u.sin_addr.s_addr = ( c3y == htp_u->lop ) ?
-                          htonl(INADDR_LOOPBACK) :
-                          INADDR_ANY;
+  adr_u.sin_addr.s_addr = (c3y == u3_Host.ops_u.off)
+                        ? htonl(INADDR_NONE)
+                        : (c3y == htp_u->lop)
+                        ? htonl(INADDR_LOOPBACK)
+                        : INADDR_ANY;
 
   uv_tcp_init(u3L, &htp_u->wax_u);
 
@@ -1378,6 +1380,10 @@ u3_http_ef_thou(c3_l     sev_l,
 static void
 _http_serv_start_all(void)
 {
+  if (c3y == u3_Host.ops_u.off) {
+    return;
+  }
+
   u3_http* htp_u;
   c3_s por_s;
 
@@ -1506,6 +1512,8 @@ _http_form_free(void)
 void
 u3_http_ef_form(u3_noun fig)
 {
+  if (c3y == u3_Host.ops_u.off) return;
+
   u3_noun sec, pro, log, red;
 
   if ( (c3n == u3r_qual(fig, &sec, &pro, &log, &red) ) ||

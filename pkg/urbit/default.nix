@@ -36,10 +36,5 @@ pkgs.stdenv.mkDerivation {
   patches = [ ./meson-build.patch ];
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
   NIX_LDFLAGS = flags;
-  src = pkgs.fetchFromGitHub {
-    owner = "urbit";
-    repo = "urbit";
-    rev = "8b171941ca4332b3a0244fca43db457fd064e1b3";
-    sha256 = "0zjq9lkl754f5x22ifnv431cp3cd3ny5rrzq74qb1icvwbw27b7p";
-  };
+  src = ../../vendor/urbit;
 }

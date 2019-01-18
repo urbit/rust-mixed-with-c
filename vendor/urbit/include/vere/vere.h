@@ -596,6 +596,7 @@
         c3_w    kno_w;                      //  -K, kernel version
         c3_c*   key_c;                      //  -k, private key file
         c3_o    net;                        //  -L, local-only networking
+        c3_o    off;                        //  -o, offline mode
         c3_s    rop_s;                      //  -l, raft port
         c3_c*   sap_c;                      //  -m, eth snapshot url
         c3_c*   nam_c;                      //  -n, unix hostname

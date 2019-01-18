@@ -15,7 +15,8 @@ urbit.expect(runner.ERROR)
   return process.exit(1);
 });
 
-urbit.expect(/dojo> /)
+urbit.expect(/talk\[\] /)
+.then(function(){ return urbit.pty.write("\x18") })
 .then(function(){
   return process.stdin
   .pipe(split())
