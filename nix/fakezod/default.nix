@@ -1,6 +1,6 @@
 # Given an urbit executable and a pill, crate a zod pier.
 
-{ pkgs, urbit, pill, urbit-runner }:
+{ pkgs, urbit, pill ? ./bootstrap.nix, urbit-runner }:
 
 pkgs.stdenv.mkDerivation {
   name        = "fakezod";

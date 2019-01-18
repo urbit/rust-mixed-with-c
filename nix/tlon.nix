@@ -29,6 +29,12 @@ rec {
       inherit secp256k1 h2o;
     };
 
-  pill    = import ./pill;
+  pill    = import ./fakezod/bootstrap.nix;
   fakezod = import ./fakezod { inherit pkgs urbit pill urbit-runner; };
+
+  solid =
+    import ./solid {
+      inherit pkgs arvo urbit urbit-runner;
+      pier=fakezod;
+    };
 }
