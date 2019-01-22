@@ -4,7 +4,7 @@ var stream       = require('stream');
 var streamSnitch = require('stream-snitch');
 var colors       = require('colors');
 var escapeRegexp = require('escape-string-regexp');
-var pty          = require('pty.js');
+var pty          = require('node-pty');
 
 var ERROR = /((ford|warn): |\r\x1b\[K\/~)/;
 
@@ -81,8 +81,8 @@ Urbit.prototype.waitSilent = function(){
 };
 
 Urbit.prototype.resetListeners = function(){
-  this.pty.socket.unpipe(this.listeners);
-  this.pty.socket.pipe(this.listeners = new stream.PassThrough);
+  this.pty._socket.unpipe(this.listeners);
+  this.pty._socket.pipe(this.listeners = new stream.PassThrough);
   return this;
 };
 

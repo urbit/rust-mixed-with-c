@@ -11,4 +11,4 @@ mkdir -p "$(dirname "$FAKEZOD")"
 
 rm -rf "$FAKEZOD"
 
-urbit-runner -F zod -c "$FAKEZOD" -B "$BOOTPILL" </dev/null
+urbit-runner -F zod -B "$BOOTPILL" "$FAKEZOD" </dev/null
