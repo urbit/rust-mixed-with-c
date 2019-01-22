@@ -28,13 +28,4 @@ rec {
       inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
       inherit secp256k1 h2o;
     };
-
-  pill    = import ./fakezod/bootstrap.nix;
-  fakezod = import ./fakezod { inherit pkgs urbit pill urbit-runner; };
-
-  solid =
-    import ./solid {
-      inherit pkgs arvo urbit urbit-runner;
-      pier=fakezod;
-    };
 }

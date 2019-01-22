@@ -15,22 +15,43 @@ urbit.expect(runner.ERROR)
   return process.exit(1);
 });
 
-urbit.expect(/dojo> /)
-.then(function(){
-  return process.stdin
-  .pipe(split())
-  .pipe(through(function(arg){
-    // environment variable or value
-    var val = arg.trim()
-      .replace(/\$[a-zA-Z0-9_]+/g, function(match){
-        var env = process.env[match.slice(1)];
-        return ( env != null ) ? env : '__unknown-var__';
-      });
-
-    return urbit.line(val);
-  }))
-  .wait()
-  .then(function(){
-    return urbit.exit(0);
+urbit.expect(/talk\[\] /)
+  .then(function() {
+    urbit.pty.write("\x18");
+  })
+  .then(function() {
+    return process.stdin
+    .pipe(split())
+    .pipe(through(function(arg){
+      // environment variable or value
+      var val = arg.trim()
+        .replace(/\$[a-zA-Z0-9_]+/g, function(match){
+          var env = process.env[match.slice(1)];
+          return ( env != null ) ? env : '__unknown-var__';
+        });
+      return urbit.line(val);
+    }))
+    .wait()
+    .then(function(){
+      return urbit.exit(0);
+    });
   });
-});
+
+urbit.expect(/dojo> /)
+  .then(function() {
+    return process.stdin
+    .pipe(split())
+    .pipe(through(function(arg){
+      // environment variable or value
+      var val = arg.trim()
+        .replace(/\$[a-zA-Z0-9_]+/g, function(match){
+          var env = process.env[match.slice(1)];
+          return ( env != null ) ? env : '__unknown-var__';
+        });
+      return urbit.line(val);
+    }))
+    .wait()
+    .then(function(){
+      return urbit.exit(0);
+    });
+  });
