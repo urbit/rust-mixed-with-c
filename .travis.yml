@@ -6,6 +6,4 @@ script:
   - cachix use urbit
   - nix-build
   - ./sh/cachix
-  - nix-shell --pure --command ./sh/fakezod
-  - nix-shell --pure --command ./sh/solid
   - nix-shell --pure --command ./sh/vere-tests
