@@ -2,7 +2,7 @@
 
 pkgs.rustPlatform.buildRustPackage rec {
   name = "rusthello";
-  src  = ../../src/rusthello;
+  src  = ./src;
   buildInputs = [ extrema minima ];
   cargoSha256 = "0d8qs92c5zdfv7qrm22681zn41v963x3x5yd8vmwpplq6x02ynaj";
   postInstall = ''

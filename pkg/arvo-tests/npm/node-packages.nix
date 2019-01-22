@@ -973,7 +973,7 @@ let
     name = "arvo-tests";
     packageName = "arvo-tests";
     version = "1.0.0";
-    src = ../../../src/arvo-tests;
+    src = ../src;
     dependencies = [
       sources."ajv-6.7.0"
       sources."array-differ-1.0.0"

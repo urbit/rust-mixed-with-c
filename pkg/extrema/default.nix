@@ -6,5 +6,5 @@
 pkgs.stdenv.mkDerivation {
   name = "extrema";
   buildInputs = [ minima ];
-  src  = ../../src/extrema;
+  src  = ./src;
 }

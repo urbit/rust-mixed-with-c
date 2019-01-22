@@ -6,5 +6,5 @@
 pkgs.stdenv.mkDerivation {
   name = "prog";
   buildInputs = [ rusthello minima ];
-  src  = ../../src/prog;
+  src  = ./src;
 }

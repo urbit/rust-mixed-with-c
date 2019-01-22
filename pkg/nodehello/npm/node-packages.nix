@@ -18,7 +18,7 @@ let
     name = "nodehello";
     packageName = "nodehello";
     version = "1.0.0";
-    src = ../../../src/nodehello;
+    src = ../src;
     dependencies = [
       sources."left-pad-1.3.0"
     ];

@@ -973,7 +973,7 @@ let
     name = "vere-tests";
     packageName = "vere-tests";
     version = "1.0.0";
-    src = ../../../src/vere-tests;
+    src = ../src;
     dependencies = [
       sources."ajv-6.7.0"
       sources."array-differ-1.0.0"

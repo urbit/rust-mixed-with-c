@@ -963,7 +963,7 @@ let
     name = "urbit-runner";
     packageName = "urbit-runner";
     version = "1.0.0";
-    src = ../../../src/urbit-runner;
+    src = ../src;
     dependencies = [
       sources."ajv-6.7.0"
       sources."array-differ-1.0.0"

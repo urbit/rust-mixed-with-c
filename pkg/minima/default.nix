@@ -2,5 +2,5 @@
 
 pkgs.stdenv.mkDerivation {
   name = "minima";
-  src  = ../../src/minima;
+  src  = ./src;
 }
