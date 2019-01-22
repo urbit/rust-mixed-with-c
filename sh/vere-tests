@@ -2,4 +2,4 @@
 
 ulimit -c unlimited -S
 vere-tests
-bash ./pkg/vere-tests/print-core-backtrace.sh $?
+bash ./pkg/vere-tests/src/print-core-backtrace.sh $?
