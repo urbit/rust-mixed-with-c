@@ -35,6 +35,7 @@ pkgs.stdenv.mkDerivation {
   name = "urbit-8b171";
   patches = [ ./meson-build.patch ];
   nativeBuildInputs = osx ++ buildenv ++ vendor ++ deps;
+  mesonFlags = "-Dgc=true";
   NIX_LDFLAGS = flags;
   src = pkgs.fetchFromGitHub {
     owner = "urbit";
