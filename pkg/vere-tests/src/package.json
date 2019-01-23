@@ -7,6 +7,6 @@
   "author": "~fyr",
   "license": "MIT",
   "dependencies": {
-    "urbit-runner": "github:urbit/runner-js#ee24550"
+    "urbit-runner": "file:../../urbit-runner/src"
   }
 }

@@ -22,10 +22,19 @@ rec {
   extrema      = import ../pkg/extrema      { inherit pkgs minima; };
   prog         = import ../pkg/prog         { inherit pkgs rusthello minima; };
 
-  urbit =
-    import ../pkg/urbit {
-      inherit pkgs;
-      inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
-      inherit secp256k1 h2o;
-    };
+  urbit = import ../pkg/urbit {
+    inherit pkgs;
+    inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
+    inherit secp256k1 h2o;
+    name = "urbit";
+    debug = false;
+  };
+
+  urbit-debug = import ../pkg/urbit {
+    inherit pkgs;
+    inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
+    inherit secp256k1 h2o;
+    name = "urbit-debug";
+    debug = true;
+  };
 }

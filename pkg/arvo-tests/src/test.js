@@ -8,7 +8,9 @@ var Urbit   = runner.Urbit;
 var ERROR   = runner.ERROR;
 var actions = runner.actions
 
-var args  = ['-B', 'urbit.pill', '-A', '..', '-cSF', 'zod', 'zod'];
+var pill = process.env.BOOTPILL || 'urbit.pill';
+
+var args  = ['-B', pill, '-A', '..', '-cSF', 'zod', 'zod'];
 var urbit = new Urbit(args);
 
 //  XX upstream the following into runner-js

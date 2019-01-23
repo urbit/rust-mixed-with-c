@@ -24,7 +24,7 @@ let
 
   exe =
     with tlon;
-    [ urbit nodehello vere-tests arvo-tests urbit-runner ];
+    [ urbit urbit-debug nodehello vere-tests arvo-tests urbit-runner ];
 
 in
 
@@ -33,6 +33,7 @@ pkgs.stdenv.mkDerivation rec {
   env         = pkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = tools ++ libs ++ osx ++ vendor ++ exe;
   URBIT_EXE   = "${tlon.urbit}/bin/urbit";
+  URBIT_DEBUG = "${tlon.urbit-debug}/bin/urbit-debug";
   BOOTPILL    = ./pill/bootstrap.pill;
   FAKEZOD     = "./out/fakezod";
   PILL        = "./out/urbit.pill";
