@@ -1,16 +1,12 @@
 { pkgs ? import ./nixpkgs.nix }:
 
+let
+
+  deps = import ./deps.nix { inherit pkgs; };
+
+in
+
 rec {
-  argon2       = import ../pkg/argon2       { inherit pkgs; };
-  murmur3      = import ../pkg/murmur3      { inherit pkgs; };
-  uv           = import ../pkg/uv           { inherit pkgs; };
-  ed25519      = import ../pkg/ed25519      { inherit pkgs; };
-  sni          = import ../pkg/sni          { inherit pkgs; };
-  scrypt       = import ../pkg/scrypt       { inherit pkgs; };
-  softfloat3   = import ../pkg/softfloat3   { inherit pkgs; };
-  secp256k1    = import ../pkg/secp256k1    { inherit pkgs; };
-  h2o          = import ../pkg/h2o          { inherit pkgs uv; };
-  ent          = import ../pkg/ent          { inherit pkgs; };
   nodehello    = import ../pkg/nodehello    { inherit pkgs; };
   vere-tests   = import ../pkg/vere-tests   { inherit pkgs; };
   arvo         = import ../pkg/arvo         { inherit pkgs; };
@@ -24,16 +20,16 @@ rec {
 
   urbit = import ../pkg/urbit {
     inherit pkgs;
-    inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
-    inherit secp256k1 h2o;
+    inherit (deps) argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
+    inherit (deps) secp256k1 h2o;
     name = "urbit";
     debug = false;
   };
 
   urbit-debug = import ../pkg/urbit {
     inherit pkgs;
-    inherit argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
-    inherit secp256k1 h2o;
+    inherit (deps) argon2 murmur3 uv ed25519 ent sni scrypt softfloat3;
+    inherit (deps) secp256k1 h2o;
     name = "urbit-debug";
     debug = true;
   };

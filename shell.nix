@@ -1,8 +1,8 @@
 let
 
   pkgs = import ./nix/nixpkgs.nix;
-
-  tlon = import ./nix/tlon.nix { pkgs=pkgs; };
+  tlon = import ./nix/pkgs.nix { pkgs=pkgs; };
+  deps = import ./nix/deps.nix { pkgs=pkgs; };
 
   tools =
     with pkgs;
@@ -19,7 +19,7 @@ let
       [ Cocoa CoreServices ]);
 
   vendor =
-    with tlon;
+    with deps;
     [ argon2 ed25519 h2o murmur3 scrypt secp256k1 sni softfloat3 uv ];
 
   exe =
