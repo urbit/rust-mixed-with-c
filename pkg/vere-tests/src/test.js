@@ -48,6 +48,7 @@ Promise.resolve(urbit)
 .then(exit)
 .catch(function(err){
   // we still exit 0, Arvo errors are not our fault ...
+  console.log('CAUGHT ERROR');
   return urbit.waitSilent()
   .then(function(){
     return urbit.warn("Arvo test aborted:", err);

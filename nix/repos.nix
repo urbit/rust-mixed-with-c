@@ -1,4 +1,4 @@
-with (import ../default.nix {});
+with (import ./tlon.nix {});
 
 {
   argon2-src     = argon2.src;

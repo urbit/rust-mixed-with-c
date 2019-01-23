@@ -46,17 +46,14 @@ let
     then "debugoptimized"
     else "release";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "urbit";
-    repo = "urbit";
-    rev = "8b171941ca4332b3a0244fca43db457fd064e1b3";
-    sha256 = "0zjq9lkl754f5x22ifnv431cp3cd3ny5rrzq74qb1icvwbw27b7p";
-  };
+  # This package doesn't use Rust, but this is a very useful utility.
+  exclude = pkgs.buildRustCrateHelpers.exclude;
 
 in
 
 pkgs.stdenv.mkDerivation {
-  inherit mesonBuildType mesonFlags name NIX_LDFLAGS postInstall src;
+  inherit mesonBuildType mesonFlags name NIX_LDFLAGS postInstall;
+  src = exclude [ ".git" "build" ] ./src;
   patches = [ ./meson-build.patch ];
   nativeBuildInputs = buildenv ++ deps ++ vendor ++ osx;
 }

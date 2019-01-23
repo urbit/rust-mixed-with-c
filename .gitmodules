@@ -1,0 +1,9 @@
+[submodule "pkg/urbit/src"]
+	path = pkg/urbit/src
+	url = https://github.com/urbit/urbit.git
+[submodule "pkg/ent/src"]
+	path = pkg/ent/src
+	url = https://github.com/urbit/libent
+[submodule "pkg/arvo/src"]
+	path = pkg/arvo/src
+	url = https://github.com/urbit/arvo.git
