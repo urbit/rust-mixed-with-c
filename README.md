@@ -32,6 +32,22 @@ In order to build everything an push results to the shared cache, run:
 ./sh/cachix
 ```
 
+## TODOs
+### Get everything working.
+
+- Get `vere-tests` working reliably in CI.
+- Get `arvo-tests` working reliably in CI.
+- Use `git-lfs` to store pills and get that working in CI.
+
+## Write build scripts for all platforms we care about.
+
+- Write OSX build scripts.
+- Write Ubuntu build scripts.
+- Write OpenBSD build scripts.
+- Static linking on Ubuntu.
+- Mostly-static linking on OSX.
+- Static linking on OpenBSD?
+
 ## DEPRECATED Iterative, Imperative Builds with Make
 
 One of the downsides of using Nix as a build system, is that it needs to fully
@@ -50,19 +66,3 @@ make          # Build the `minima` package.
 make clean    # Delete the build artifacts of the `minima` package.
 ```
 
-## TODOs
-### Get everything working.
-
-- Get `vere-tests` working reliably in CI.
-- Get `arvo-tests` working reliably in CI.
-- Use `git-lfs` to store pills and get that working in CI.
-- Use git submodules instead of `fetchFromGitHub`.
-- Update `urbit` code to work with latest master.
-- Update `arvo` code to work with the latest master.
-
-## Write build scripts for all platforms we care about.
-
-- Write OSX build scripts.
-- Write Ubuntu build scripts.
-- Write OpenBSD build scripts.
-- Static linking on Ubuntu.
