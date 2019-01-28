@@ -1,12 +1,12 @@
-name ?= minima
+pkgname ?= minima
+workdir ?= ../../../work
+outdir  ?= ../../../out
 
-TMP  ?= ../../work
-out  ?= ../../out
-b    := ${TMP}/${name}
+b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
-CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib -L$b
+CFLAGS  ?= -I${outdir}/include -std=c99
+LDFLAGS ?= -L${outdir}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -17,16 +17,16 @@ AR      ?= ar
 all: $b/libminima.a minima.h
 
 install: all
-	mkdir -p ${out}/lib
-	mkdir -p ${out}/include
-	cp $b/libminima.a ${out}/lib
-	cp minima.h ${out}/include
+	mkdir -p ${outdir}/lib
+	mkdir -p ${outdir}/include
+	cp $b/libminima.a ${outdir}/lib
+	cp minima.h ${outdir}/include
 
 test: $b/test
 	$b/test
 
 clean:
-	rm -f $b/*
+	rm -rf $b
 
 ################################################################################
 
