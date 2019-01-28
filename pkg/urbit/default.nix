@@ -27,12 +27,6 @@ let
     pkgs.lib.optionalString pkgs.stdenv.isDarwin
       "-framework CoreServices -framework CoreFoundation";
 
-  postInstall =
-    pkgs.lib.optionalString (name != "urbit") ''
-      echo mv $out/bin/urbit "$out/bin/${name}"
-      mv $out/bin/urbit "$out/bin/${name}"
-    '';
-
   mesonFlags =
     if debug
     then "-Dgc=true  -Dprof=true  -Deventtime=false"
@@ -49,7 +43,7 @@ let
 in
 
 pkgs.stdenv.mkDerivation {
-  inherit mesonBuildType mesonFlags name NIX_LDFLAGS postInstall;
+  inherit mesonBuildType mesonFlags name NIX_LDFLAGS;
   src = exclude [ ".git" "build" ] ./src;
   nativeBuildInputs = buildenv ++ deps ++ vendor ++ osx ++ [ pkgs.git ];
   builder = ./builder.sh;

@@ -8,5 +8,3 @@ cd $src
 
 make
 make install
-
-[ $name = urbit ] || mv $out/bin/{urbit,$name}

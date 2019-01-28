@@ -32,9 +32,10 @@ pkgs.stdenv.mkDerivation rec {
   name        = "env";
   env         = pkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = tools ++ libs ++ osx ++ vendor ++ exe;
-  URBIT_EXE   = "${tlon.urbit}/bin/urbit";
+  # URBIT_EXE   = "${tlon.urbit}/bin/urbit";
+  URBIT_EXE   = "${tlon.urbit-debug}/bin/urbit-debug";
   URBIT_DEBUG = "${tlon.urbit-debug}/bin/urbit-debug";
-  BOOTPILL    = ../pill/bootstrap.pill;
+  BOOTPILL    = ../bin/bootstrap.pill;
   FAKEZOD     = "./out/fakezod";
   PILL        = "./out/urbit.pill";
   ARVO        = tlon.arvo;

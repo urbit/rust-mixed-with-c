@@ -17,6 +17,7 @@ rec {
   minima       = import ../pkg/minima       { inherit pkgs; };
   extrema      = import ../pkg/extrema      { inherit pkgs minima; };
   prog         = import ../pkg/prog         { inherit pkgs rusthello minima; };
+  hello        = import ../pkg/hello        { inherit pkgs; };
 
   urbit = import ../pkg/urbit {
     inherit pkgs;
