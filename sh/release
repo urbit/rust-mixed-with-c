@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+release () {
+  nix-build nix/release.nix --no-out-link -A "$1"
+}
+
+hello_linux32=$(release hello-linux32)
+hello_linux64=$(release hello-linux64)
+hello_darwin=$(release hello-darwin)
+
+mkdir -p ./release/{linux32,linux64,darwin}/bin
+
+cp -f $hello_linux32/bin/hello ./release/linux32/bin
+cp -f $hello_linux64/bin/hello ./release/linux64/bin
+cp -f $hello_darwin/bin/hello ./release/darwin/bin
