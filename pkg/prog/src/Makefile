@@ -1,7 +1,7 @@
-name ?= prog
+pkgname ?= prog
+workdir ?= ../../../work
+outdir  ?= ../../../out
 
-TMP  ?= ../../work
-out  ?= ../../out
 b    := ${TMP}/${name}
 hack := $(shell mkdir -p $b)
 
