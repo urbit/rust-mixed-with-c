@@ -1,10 +1,8 @@
-{
-  pkgs ? import ../../nix/nixpkgs.nix,
-  minima
-}:
+{ pkgs, minima }:
 
 pkgs.stdenv.mkDerivation {
-  name = "extrema";
+  name        = "extrema";
   buildInputs = [ minima ];
-  src  = ./src;
+  src         = ./src;
+  builder     = ./builder.sh;
 }

@@ -1,12 +1,12 @@
-name ?= extrema
+pkgname ?= extrema
+workdir ?= ../../../work
+outdir  ?= ../../../out
 
-TMP  ?= ../../work
-out  ?= ../../out
-b    := ${TMP}/${name}
+b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
-CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib -L$b
+CFLAGS  ?= -I${outdir}/include -std=c99
+LDFLAGS ?= -L${outdir}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -17,10 +17,10 @@ AR      ?= ar
 all: $b/libextrema.a extrema.h
 
 install: all
-	mkdir -p ${out}/lib
-	mkdir -p ${out}/include
-	cp $b/libextrema.a ${out}/lib
-	cp extrema.h ${out}/include
+	mkdir -p ${outdir}/lib
+	mkdir -p ${outdir}/include
+	cp $b/libextrema.a ${outdir}/lib
+	cp extrema.h ${outdir}/include
 
 test: $b/test
 	$b/test
