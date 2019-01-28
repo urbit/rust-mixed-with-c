@@ -2,11 +2,11 @@ pkgname ?= prog
 workdir ?= ../../../work
 outdir  ?= ../../../out
 
-b    := ${TMP}/${name}
+b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
-CFLAGS  ?= -I${out}/include -std=c99
-LDFLAGS ?= -L${out}/lib -L$b
+CFLAGS  ?= -I${outdir}/include -std=c99
+LDFLAGS ?= -L${outdir}/lib -L$b
 CC      ?= cc
 AR      ?= ar
 
@@ -17,8 +17,8 @@ AR      ?= ar
 all: $b/prog
 
 install: all
-	mkdir -p ${out}/bin
-	cp $b/prog ${out}/bin
+	mkdir -p ${outdir}/bin
+	cp $b/prog ${outdir}/bin
 
 test: $b/prog
 	$b/prog

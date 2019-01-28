@@ -1,8 +1,8 @@
-name ?= rusthello
+pkgname ?= rusthello
+workdir ?= ../../../work
+outdir  ?= ../../../out
 
-TMP  ?= ../../work
-out  ?= ../../out
-b    := ${TMP}/${name}
+b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
 ################################################################################
@@ -12,21 +12,18 @@ hack := $(shell mkdir -p $b)
 all: $b/debug/librusthello.a include/rusthello.h
 
 install: all
-	mkdir -p ${out}/lib
-	mkdir -p ${out}/include
-	cp $b/debug/librusthello.a ${out}/lib
-	cp include/rusthello.h ${out}/include
+	mkdir -p ${outdir}/lib
+	mkdir -p ${outdir}/include
+	cp $b/debug/librusthello.a ${outdir}/lib
+	cp include/rusthello.h ${outdir}/include
 
 test:
-	out=${out} CARGO_TARGET_DIR=$b cargo test
+	out=${outdir} CARGO_TARGET_DIR=$b cargo test
 
 clean:
-	out=${out} CARGO_TARGET_DIR=$b cargo clean
+	out=${outdir} CARGO_TARGET_DIR=$b cargo clean
 
 ################################################################################
 
-$b:
-	mkdir -p $b
-
-$b/debug/librusthello.a: $b
-	out=${out} CARGO_TARGET_DIR=$b cargo build
+$b/debug/librusthello.a:
+	out=${outdir} CARGO_TARGET_DIR=$b cargo build

@@ -1,11 +1,8 @@
 {
   pkgs,
-
   name ? "urbit",
   debug ? false,
-
-  argon2, ed25519, ent, h2o, murmur3, scrypt, secp256k1, sni, softfloat3,
-  uv
+  argon2, ed25519, ent, h2o, murmur3, scrypt, secp256k1, sni, softfloat3, uv
 }:
 
 let
@@ -54,6 +51,6 @@ in
 pkgs.stdenv.mkDerivation {
   inherit mesonBuildType mesonFlags name NIX_LDFLAGS postInstall;
   src = exclude [ ".git" "build" ] ./src;
-  patches = [ ./meson-build.patch ];
-  nativeBuildInputs = buildenv ++ deps ++ vendor ++ osx;
+  nativeBuildInputs = buildenv ++ deps ++ vendor ++ osx ++ [ pkgs.git ];
+  builder = ./builder.sh;
 }
