@@ -4,5 +4,4 @@ let
 
 in
 
-import ./nixcrpkgs
-# import ./nixcrpkgs/top.nix { inherit nixpkgs; }
+import ./nixcrpkgs/top.nix { inherit nixpkgs; }
