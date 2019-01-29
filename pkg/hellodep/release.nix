@@ -31,10 +31,9 @@
 }:
 
 env.make_derivation {
-  name          = "${name}-${env_name}";
-  exename       = name;
-  src           = ./src;
-# native_inputs = buildenv;
-# cross_inputs  = deps ++ vendor ++ osx;
-  builder       = ./release.sh;
+  name         = "${name}-${env_name}";
+  exename      = name;
+  src          = ./src;
+  cross_inputs = [ env.zlib ];
+  builder      = ./release.sh;
 }

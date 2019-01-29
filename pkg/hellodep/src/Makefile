@@ -5,10 +5,7 @@ outdir  ?= ../../../out
 b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
-CFLAGS  ?= -I${outdir}/include -std=c99
-LDFLAGS ?= -L${outdir}/lib -L$b
-CC      ?= cc
-AR      ?= ar
+CFLAGS  := ${CFLAGS} -std=c99
 
 ################################################################################
 
@@ -29,7 +26,9 @@ clean:
 ################################################################################
 
 $b/hellodep: $b/hellodep.o
-	${CC} ${LDFLAGS} $< -o $@
+	echo ${CC} $< ${LDFLAGS} -o $@
+	${CC} $< ${LDFLAGS} -o $@
 
 $b/%.o: %.c
+	echo ${CC} ${CFLAGS} -c -o $@ $<
 	${CC} ${CFLAGS} -c -o $@ $<

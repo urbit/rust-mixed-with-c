@@ -11,10 +11,12 @@ install: all
 	nix-env -f . -iA urbit -iA urbit-debug
 
 release:
-	sh/release hello-linux32
-	sh/release hello-linux64
-	sh/release hello-darwin
-	sh/release hellodep-linux64
+	sh/release hello linux32
+	sh/release hello linux64
+	sh/release hello darwin
+	sh/release hellodep linux32
+	sh/release hellodep linux64
+	sh/release hellodep darwin
 
 test:
 	nix-shell nix/test-env.nix --pure --command sh/vere-tests

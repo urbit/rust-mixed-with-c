@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 release () {
   nix-build nix/release.nix --no-out-link -A "$1"
 }
 
-hello_linux32=$(release hello-linux32)
-hello_linux64=$(release hello-linux64)
-hello_darwin=$(release hello-darwin)
+pkg="$1"
+env="$2"
 
-mkdir -p ./release/{linux32,linux64,darwin}/bin
+res=$(release "$pkg-$env")
 
-cp -f $hello_linux32/bin/hello ./release/linux32/bin
-cp -f $hello_linux64/bin/hello ./release/linux64/bin
-cp -f $hello_darwin/bin/hello ./release/darwin/bin
+mkdir -p ./release/$env/bin/
+cp -f $res/bin/* ./release/$env/bin/

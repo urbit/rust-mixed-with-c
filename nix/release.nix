@@ -16,4 +16,6 @@ in
   hello-darwin  = import ../pkg/hello/release.nix darwin;
 
   hellodep-linux64  = import ../pkg/hellodep/release.nix linux64 {} {};
+  hellodep-linux32  = import ../pkg/hellodep/release.nix linux32 {} {};
+  hellodep-darwin   = import ../pkg/hellodep/release.nix darwin  {} {};
 }
