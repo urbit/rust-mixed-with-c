@@ -1,4 +1,4 @@
-{ env_name, env }:
+{ env_name, env, nixpkgs }:
 
 env.make_derivation {
   name    = "hello-${env_name}";
