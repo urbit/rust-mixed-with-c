@@ -1,12 +1,16 @@
 source $setup
 
-export PKG_CONFIG=$(which pkg-config-cross)
 export CC=$host-gcc
-export CFLAGS="$(${PKG_CONFIG} --cflags zlib)"
-export LDFLAGS="$(${PKG_CONFIG} --libs zlib)"
 
+export CFLAGS=
 CFLAGS="$CFLAGS -I$gmp/include"
+CFLAGS="$CFLAGS -I$sigsegv/include"
+CFLAGS="$CFLAGS -I$zlib/include"
+
+export LDFLAGS=
 LDFLAGS="$LDFLAGS -L$gmp/lib -lgmp"
+LDFLAGS="$LDFLAGS -L$sigsegv/lib -lsigsegv"
+LDFLAGS="$LDFLAGS -L$zlib/lib -lz"
 
 export pkgname=$name
 export workdir=$TMP
