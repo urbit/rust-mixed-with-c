@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
+
+traced () {
+  echo '$' "$@" >&2; "$@"
+}
 
 release () {
-  nix-build nix/release.nix --no-out-link -A "$1"
+  traced nix-build nix/release.nix --no-out-link -A "$1"
 }
 
 pkg="$1"
@@ -12,4 +16,4 @@ env="$2"
 res=$(release "$pkg-$env")
 
 mkdir -p ./release/$env/bin/
-cp -f $res/bin/* ./release/$env/bin/
+traced cp -f $res/bin/* ./release/$env/bin/

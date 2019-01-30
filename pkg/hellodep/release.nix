@@ -4,36 +4,37 @@
 ## but I'm going to slowly add `urbit`'s dependencies one by one, until I
 ## have them all working.
 ##
+## TODO Add these dependencies to `nixcrpkgs`:
+##
+## - curl
+## - libsigsegv
+## - ncurses
+## - openssl
+## - re2c
+
 
 { env_name, env, nixpkgs }:
 
 { name ? "hellodep", debug ? false }:
 
 {
-  # argon2,
-  # curl,
-  # ed25519,
-  # ent,
-  # gmp,
-  # h2o,
-  # libsigsegv,
-  # murmur3,
-  # ncurses,
-  # openssl,
-  # re2c,
-  # scrypt,
-  # scrypt,
-  # secp256k1,
-  # sni,
-  # softfloat3,
+  # argon2
+  # murmur3
   # uv
-  # zlib,
+  # ed25519
+  # sni
+  # scrypt
+  # softfloat3
+  # secp256k1
+  # h2o
+  # ent
 }:
 
 env.make_derivation {
   name         = "${name}-${env_name}";
   exename      = name;
   src          = ./src;
-  cross_inputs = [ env.zlib ];
+  gmp          = env.libgmp;
+  cross_inputs = [ env.zlib env.libgmp ];
   builder      = ./release.sh;
 }
