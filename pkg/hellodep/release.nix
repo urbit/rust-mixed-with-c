@@ -8,9 +8,7 @@
 ##
 ## - curl
 ## - ncurses
-## - openssl
 ## - re2c
-
 
 { env_name, env, nixpkgs }:
 
@@ -36,6 +34,7 @@ env.make_derivation {
   gmp          = env.libgmp;
   sigsegv      = env.libsigsegv;
   zlib         = env.zlib;
-  cross_inputs = [ env.zlib env.libgmp env.libsigsegv ];
+  openssl      = env.openssl;
+  cross_inputs = with env; [ zlib libgmp libsigsegv openssl ];
   builder      = ./release.sh;
 }
