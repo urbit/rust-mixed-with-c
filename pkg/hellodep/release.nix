@@ -7,7 +7,6 @@
 ## TODO Add these dependencies to `nixcrpkgs`:
 ##
 ## - curl
-## - ncurses
 ## - re2c
 
 { env_name, env, nixpkgs }:
@@ -32,9 +31,10 @@ env.make_derivation {
   exename      = name;
   src          = ./src;
   gmp          = env.libgmp;
+  ncurses      = env.ncurses;
+  openssl      = env.openssl;
   sigsegv      = env.libsigsegv;
   zlib         = env.zlib;
-  openssl      = env.openssl;
-  cross_inputs = with env; [ zlib libgmp libsigsegv openssl ];
+  cross_inputs = with env; [ zlib libgmp libsigsegv openssl ncurses ];
   builder      = ./release.sh;
 }
