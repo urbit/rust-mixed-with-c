@@ -14,7 +14,7 @@ let
 
   deps =
     with pkgs;
-    [ curl gmp scrypt libsigsegv ncurses openssl re2c zlib ];
+    [ curl gmp scrypt libsigsegv ncurses openssl zlib ];
 
   vendor =
     [ argon2 softfloat3 ed25519 ent h2o scrypt uv murmur3 secp256k1 sni ];

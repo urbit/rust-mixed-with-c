@@ -7,7 +7,6 @@
 ## TODO Add these dependencies to `nixcrpkgs`:
 ##
 ## - curl
-## - re2c
 
 { env_name, env, nixpkgs }:
 
