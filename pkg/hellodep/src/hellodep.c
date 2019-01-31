@@ -7,9 +7,11 @@
 #include <openssl/bio.h>
 #include <openssl/ssl.h>
 #include <sigsegv.h>
+#include <curl/curl.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void curl();
 void gmp();
 void ncurses();
 void openssl();
@@ -33,6 +35,11 @@ int main(void) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+void curl() {
+  CURL *curl = curl_easy_init();
+  curl_easy_cleanup(curl);
+}
 
 void gmp() {
   mpz_t n;
