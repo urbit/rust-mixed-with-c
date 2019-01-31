@@ -5,7 +5,7 @@ outdir  ?= ../../../out
 b    := ${workdir}/${pkgname}
 hack := $(shell mkdir -p $b)
 
-CFLAGS  := ${CFLAGS} -std=gnu99
+CFLAGS  := ${CFLAGS} -std=gnu99 -O0
 
 ################################################################################
 

@@ -7,16 +7,30 @@
 #include <openssl/ssl.h>
 #include <openssl/bio.h>
 
+////////////////////////////////////////////////////////////////////////////////
+
+void gmp();
+void openssl();
+void sigsegv();
+void zlib();
+
+////////////////////////////////////////////////////////////////////////////////
+
 int main(void) {
-  gmp();
-  openssl();
-  sigsegv();
-  zlib();
+  if (0) {
+    gmp();
+    zlib();
+    openssl();
+    sigsegv();
+  };
 
   printf("Hello World!\n");
 
+
   return 0;
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void gmp() {
   mpz_t n;
@@ -24,10 +38,10 @@ void gmp() {
 }
 
 void openssl() {
-  BIO *bio_stdout;
-  bio_stdout = BIO_new_fp(stdout, BIO_NOCLOSE);
-  BIO_printf(bio_stdout, "hello, World!\n");
-  BIO_free_all(bio_stdout);
+  BIO *bio_stderr;
+  bio_stderr = BIO_new_fp(stderr, BIO_NOCLOSE);
+  BIO_printf(bio_stderr, "Hello, World!\n");
+  BIO_free_all(bio_stderr);
 }
 
 void sigsegv() {
