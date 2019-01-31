@@ -5,33 +5,33 @@
 ## have them all working.
 ##
 
-{ env_name, env, nixpkgs }:
-
-{ name ? "hellodep", debug ? false }:
+{ env_name, env, deps }:
 
 {
-  # argon2
-  # murmur3
-  # uv
-  # ed25519
-  # sni
-  # scrypt
-  # softfloat3
-  # secp256k1
-  # h2o
-  # ent
+  name ? "hellodep",
+  debug ? false,
 }:
 
+let
+
+  sysdeps = with env; [ curl libgmp libsigsegv ncurses openssl zlib ];
+
+  vendor =
+    with deps; [ ed25519 ];
+    # [ argon2 murmur3 uv sni scrypt softfloat3 secp256k1 h2o ent ];
+
+in
+
 env.make_derivation {
+  inherit (deps) ed25519;
+    # argon2 murmur3 uv ed25519 sni scrypt softfloat3 secp256k1 h2o ent;
+
+  inherit (env)
+    curl libgmp ncurses openssl libsigsegv zlib;
+
   name         = "${name}-${env_name}";
   exename      = name;
   src          = ./src;
-  curl         = env.curl;
-  gmp          = env.libgmp;
-  ncurses      = env.ncurses;
-  openssl      = env.openssl;
-  sigsegv      = env.libsigsegv;
-  zlib         = env.zlib;
-  cross_inputs = with env; [ curl libgmp libsigsegv ncurses openssl zlib ];
+  cross_inputs = sysdeps ++ vendor;
   builder      = ./release.sh;
 }

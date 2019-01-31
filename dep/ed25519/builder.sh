@@ -17,10 +17,13 @@ sources=" \
 CFLAGS="-O3 -Wall -I$src/src"
 
 for fn in $sources
-do echo cc $CFLAGS -c $fn -o $(basename $fn).o
-   cc -O3 -Wall -I$src/src -c $fn -o $(basename $fn).o
+do echo $CC $CFLAGS -c $fn -o $(basename $fn).o
+   $CC -O3 -Wall -I$src/src -c $fn -o $(basename $fn).o
 done
 
 mkdir -p $out/{lib,include}
-ar rcs $out/lib/libed25519.a *.o
+
+$AR rcs $out/lib/libed25519.a *.o
+echo $AR rcs $out/lib/libed25519.a *.o
+
 cp $src/src/*.h $out/include
