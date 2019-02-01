@@ -12,12 +12,16 @@ sources=" \
   b64 \
 "
 
-CFLAGS="-I$src -Wall -ffast-math -D_FORTIFY_SOURCE=2 -fstack-protector"
+CFLAGS="-I$src -Wall -ffast-math -O3 -D_FORTIFY_SOURCE=2 -fstack-protector"
 
 for s in $sources
-do cc $CFLAGS -c $src/$s.c -o $s.o
+do echo $CC $CFLAGS -c $src/$s.c -o $s.o
+   cc $CFLAGS -c $src/$s.c -o $s.o
 done
 
+echo $AR rcs libscrypt.a *.o
+$AR rcs libscrypt.a *.o
+
 mkdir -p $out/{lib,include}
-ar rcs $out/lib/libscrypt.a *.o
+cp libscrypt.a $out/lib
 cp $src/*.h $out/include

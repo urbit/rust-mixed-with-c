@@ -1,9 +1,13 @@
-{ pkgs }:
+{ crossenv }:
 
-pkgs.stdenv.mkDerivation rec {
-  name = "scrypt-02969";
+crossenv.make_derivation rec {
+  name    = "scrypt-02969";
   builder = ./builder.sh;
-  src = pkgs.fetchFromGitHub {
+
+  CC = "${crossenv.host}-gcc";
+  AR = "${crossenv.host}-ar";
+
+  src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "libscrypt";
     rev = "029693ff1cbe4f69d3a2da87d0f4f034f92cc0c2";
