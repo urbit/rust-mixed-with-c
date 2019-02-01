@@ -1,9 +1,13 @@
-{ pkgs }:
+{ crossenv }:
 
-pkgs.stdenv.mkDerivation rec {
-  name = "softfloat3-ec4c7";
+crossenv.make_derivation rec {
+  name    = "softfloat3-ec4c7";
   builder = ./builder.sh;
-  src = pkgs.fetchFromGitHub {
+
+  CC = "${crossenv.host}-gcc";
+  AR = "${crossenv.host}-ar";
+
+  src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "berkeley-softfloat-3";
     rev = "ec4c7e31b32e07aad80e52f65ff46ac6d6aad986";

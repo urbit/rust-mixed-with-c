@@ -5,7 +5,9 @@ chmod -R u+w $TMP/$name
 cd $TMP/$name
 
 cd ./build/Linux-386-SSE2-GCC
-sed -i 's|gcc|cc|' Makefile
+sed -i 's|gcc|$(CC)|'        Makefile
+sed -i 's/ar crs/$(AR) crs/' Makefile
+
 make -j4
 
 mkdir -p $out/{lib,include}

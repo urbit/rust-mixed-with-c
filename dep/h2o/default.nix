@@ -1,4 +1,4 @@
-{ pkgs ? import ../../nix/nixpkgs.nix, uv }:
+{ pkgs }:
 
 pkgs.stdenv.mkDerivation rec {
   name = "h2o-0ed9a";

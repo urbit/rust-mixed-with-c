@@ -1,4 +1,4 @@
-{ pkgs ? import ../../nix/nixpkgs.nix }:
+{ pkgs }:
 
 pkgs.stdenv.mkDerivation rec {
   name = "ed25519-76385";
