@@ -1,6 +1,6 @@
-{ pkgs }:
+{ crossenv }:
 
-pkgs.stdenv.mkDerivation rec {
+crossenv.make_derivation rec {
   name    = "secp256k1-b4e87";
   builder = ./builder.sh;
 
@@ -11,12 +11,12 @@ pkgs.stdenv.mkDerivation rec {
     "--enable-module-recovery"
   ];
 
-  buildInputs = [ pkgs.gmp ];
-  nativeBuildInputs =
-    with pkgs;
+  cross_inputs  = [ crossenv.libgmp ];
+  native_inputs =
+    with crossenv.nixpkgs;
     [ autoconf automake libtool m4 ];
 
-  src = pkgs.fetchFromGitHub {
+  src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "bitcoin-core";
     repo = "secp256k1";
     rev = "e34ceb333b1c0e6f4115ecbb80c632ac1042fa49";
