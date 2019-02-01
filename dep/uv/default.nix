@@ -1,23 +1,23 @@
-{ pkgs ? import ../../nix/nixpkgs.nix }:
+{ pkgs }:
 
 let
 
-  osxBuildInputs =
+  osx =
     with pkgs;
     lib.optionals stdenv.isDarwin (
       with darwin.apple_sdk.frameworks;
       [ Cocoa CoreServices ]);
 
-  autotools =
-    with pkgs;
-    [ pkgconfig autoconf automake libtool gnumake ];
-
 in
 
 pkgs.stdenv.mkDerivation rec {
-  name = "uv-64294";
-  buildInputs = autotools ++ osxBuildInputs;
-  builder = ./builder.sh;
+  name        = "uv-64294";
+  buildInputs = osx ++ (with pkgs; [ autoconf automake libtool m4 ]);
+  builder     = ./builder.sh;
+
+  CFLAGS         = "-fPIC";
+  configureFlags = [ "--disable-shared" ];
+
   src = pkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "libuv";

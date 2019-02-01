@@ -1,9 +1,9 @@
 source $stdenv/setup
 
-cp -r $src $TMP/$name
-chmod -R a+w $TMP/$name
-cd $TMP/$name
+cp -r $src ./src
+chmod -R a+w ./src
+cd ./src
 
 LIBTOOLIZE=libtoolize ./autogen.sh
-./configure --prefix=$out
+./configure --prefix=$out --host=$host $configureFlags
 make install
