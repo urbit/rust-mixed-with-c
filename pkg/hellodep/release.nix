@@ -17,14 +17,14 @@ let
   sysdeps = with env; [ curl libgmp libsigsegv ncurses openssl zlib ];
 
   vendor =
-    with deps; [ ed25519 secp256k1 ];
-    # [ argon2 murmur3 uv sni scrypt softfloat3 h2o ent ];
+    with deps; [ ed25519 secp256k1 murmur3 ];
+    # [ argon2 uv sni scrypt softfloat3 h2o ent ];
 
 in
 
 env.make_derivation {
-  inherit (deps) ed25519 secp256k1;
-    # argon2 murmur3 uv ed25519 sni scrypt softfloat3 secp256k1 h2o ent;
+  inherit (deps) ed25519 secp256k1 murmur3;
+    # argon2 uv ed25519 sni scrypt softfloat3 secp256k1 h2o ent;
 
   inherit (env)
     curl libgmp ncurses openssl libsigsegv zlib;

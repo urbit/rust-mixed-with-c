@@ -19,10 +19,6 @@ let
 in
 
 {
-  secp256k1-linux32 = linux32.deps.secp256k1;
-  secp256k1-linux64 = linux64.deps.secp256k1;
-  secp256k1-darwin  = darwin.deps.secp256k1;
-
   hello-linux32 = import ../pkg/hello/release.nix linux32;
   hello-linux64 = import ../pkg/hello/release.nix linux64;
   hello-darwin  = import ../pkg/hello/release.nix darwin;
