@@ -1,15 +1,14 @@
 source $stdenv/setup
 
-cp -r $src/* $TMP
-chmod -R a+w $TMP
-cd $TMP
+cp -r $src ./src
+chmod -R a+w ./src
+cd ./src
 
-sed -i 's|^PREFIX = /usr$|PREFIX = ${out}|' Makefile
+sed -i 's|ar rcs|${AR} rcs|' Makefile
 
-export NO_THREADS=1;
+make libargon2.a -j4
 
-make install -j4
-
-cp $src/src/blake2/blake2.h $out/include
-rm -f $out/lib/libargon2*dylib
-rm -f $out/lib/libargon2*so*
+mkdir -p $out/{lib,include}
+cp libargon2.a      $out/lib
+cp include/argon2.h $out/include
+cp ./src/blake2/*.h $out/include

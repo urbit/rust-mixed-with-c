@@ -17,7 +17,7 @@ release () {
 pkg="$1"
 env="$2"
 
-res=$(release "$pkg-$env")
+res=$(release "$env.$pkg")
 
 mkdir -p ./release/
 traced cp -f $res/bin/$pkg ./release/$pkg-$env

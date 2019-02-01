@@ -19,11 +19,22 @@ let
 in
 
 {
-  hello-linux32 = import ../pkg/hello/release.nix linux32;
-  hello-linux64 = import ../pkg/hello/release.nix linux64;
-  hello-darwin  = import ../pkg/hello/release.nix darwin;
+  linux32 = {
+    inherit (linux32.deps) argon2 ed25519 secp256k1 murmur3 sni;
+    hello    = import ../pkg/hello/release.nix linux32;
+    hellodep = import ../pkg/hellodep/release.nix linux32 {};
+  };
 
-  hellodep-linux64  = import ../pkg/hellodep/release.nix linux64 {};
-  hellodep-linux32  = import ../pkg/hellodep/release.nix linux32 {};
-  hellodep-darwin   = import ../pkg/hellodep/release.nix darwin {};
+  linux64 = {
+    inherit (linux64.deps) argon2 ed25519 secp256k1 murmur3 sni;
+    hello    = import ../pkg/hello/release.nix linux64;
+    hellodep = import ../pkg/hellodep/release.nix linux64 {};
+  };
+
+  darwin = {
+    inherit (darwin.deps)  argon2 ed25519 secp256k1 murmur3 sni;
+    hello    = import ../pkg/hello/release.nix darwin;
+    hellodep = import ../pkg/hellodep/release.nix darwin {};
+  };
+
 }
