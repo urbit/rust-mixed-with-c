@@ -20,19 +20,19 @@ in
 
 {
   linux32 = {
-    inherit (linux32.deps) argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3 uv;
+    inherit (linux32.deps) argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3 uv ent;
     hello    = import ../pkg/hello/release.nix linux32;
     hellodep = import ../pkg/hellodep/release.nix linux32 {};
   };
 
   linux64 = {
-    inherit (linux64.deps) argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3 uv;
+    inherit (linux64.deps) argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3 uv ent;
     hello    = import ../pkg/hello/release.nix linux64;
     hellodep = import ../pkg/hellodep/release.nix linux64 {};
   };
 
   darwin = {
-    inherit (darwin.deps)  argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3;
+    inherit (darwin.deps)  argon2 ed25519 secp256k1 murmur3 sni scrypt softfloat3 ent;
     hello    = import ../pkg/hello/release.nix darwin;
     hellodep = import ../pkg/hellodep/release.nix darwin {};
   };
