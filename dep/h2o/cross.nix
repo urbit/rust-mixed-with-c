@@ -1,10 +1,13 @@
-{ pkgs, uv }:
+{ crossenv, uv }:
 
-pkgs.stdenv.mkDerivation rec {
+crossenv.make_derivation rec {
+  inherit (crossenv) openssl zlib;
+  inherit uv;
+
   name = "h2o-0ed9a";
-  buildInputs = [ uv pkgs.openssl pkgs.zlib ];
+  buildInputs = [ uv crossenv.openssl crossenv.zlib ];
   builder = ./builder.sh;
-  src = pkgs.fetchFromGitHub {
+  src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "h2o";
     rev = "0ed9ac70757a16ec45f91b8a347850d9699c3fb1";

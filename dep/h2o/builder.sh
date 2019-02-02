@@ -84,7 +84,11 @@ sources=" \
 
 CFLAGS=" \
   -O3 \
+  --std=gnu99 \
   -Wall -Wno-unused-value -Wno-unused-function \
+  -I$openssl/include \
+  -I$zlib/include \
+  -I$uv/include \
   -I$src/include \
   -I$src/deps/cloexec \
   -I$src/deps/brotli/enc \
