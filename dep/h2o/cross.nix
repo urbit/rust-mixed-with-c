@@ -5,8 +5,9 @@ crossenv.make_derivation rec {
   inherit uv;
 
   name = "h2o-0ed9a";
-  buildInputs = [ uv crossenv.openssl crossenv.zlib ];
+  cross_inputs = [ uv crossenv.openssl crossenv.zlib ];
   builder = ./builder.sh;
+
   src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "urbit";
     repo = "h2o";
