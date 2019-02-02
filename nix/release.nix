@@ -2,7 +2,6 @@ let
 
   nixpkgs   = import ./nixpkgs.nix;
   nixcrpkgs = import ./nixcrpkgs.nix;
-  deps      = import ./deps.nix { pkgs=nixpkgs; };
 
   crossdeps = import ./crossdeps.nix;
 
@@ -16,22 +15,44 @@ let
   linux64 = release "linux64" nixcrpkgs.linux64;
   darwin  = release "darwin"  nixcrpkgs.mac;
 
+  hello = env:
+    import ../pkg/hello/release.nix env;
+
+  hellodep = env:
+    import ../pkg/hellodep/release.nix env {};
+
+  urbit = env:
+    import ../pkg/urbit/release.nix env
+      { debug = false; name = "urbit"; };
+
+  urbit-debug = env:
+    import ../pkg/urbit/release.nix env
+      { debug = true; name = "urbit-debug"; };
+
 in
 
 {
+  linux32-env = linux32.env;
   linux32 = linux32.deps // {
-    hello    = import ../pkg/hello/release.nix linux32;
-    hellodep = import ../pkg/hellodep/release.nix linux32 {};
+    hello       = hello       linux32;
+    hellodep    = hellodep    linux32;
+    urbit       = urbit       linux32;
+    urbit-debug = urbit-debug linux32;
   };
 
+  linux64-env = linux64.env;
   linux64 = linux64.deps // {
-    hello    = import ../pkg/hello/release.nix linux64;
-    hellodep = import ../pkg/hellodep/release.nix linux64 {};
+    hello       = hello       linux64;
+    hellodep    = hellodep    linux64;
+    urbit       = urbit       linux64;
+    urbit-debug = urbit-debug linux64;
   };
 
+  darwin-env = darwin.env;
   darwin = darwin.deps // {
-    hello    = import ../pkg/hello/release.nix darwin;
-    hellodep = import ../pkg/hellodep/release.nix darwin {};
+    hello       = hello       darwin;
+    hellodep    = hellodep    darwin;
+    urbit       = urbit       darwin;
+    urbit-debug = urbit-debug darwin;
   };
-
 }
