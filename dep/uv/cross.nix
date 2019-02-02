@@ -1,22 +1,12 @@
 { crossenv }:
 
-let
-
-  osx =
-    if crossenv.os == "macos"
-    then builtins.trace crossenv.sdk
-         [ ] # Cocoa CoreServices ]
-    else [];
-
-in
-
 crossenv.make_derivation rec {
   name          = "uv-64294";
-  native_inputs = osx ++ (with crossenv.nixpkgs; [autoconf automake libtool m4]);
+  native_inputs = with crossenv.nixpkgs; [ autoconf automake libtool m4 ];
   builder       = ./builder.sh;
 
-  CFLAGS         = "-fPIC";
   configureFlags = [ "--disable-shared" ];
+  CFLAGS         = "-fPIC";
 
   src = crossenv.nixpkgs.fetchFromGitHub {
     owner = "urbit";
