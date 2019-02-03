@@ -16,7 +16,7 @@ CFLAGS="-I$src -Wall -ffast-math -O3 -D_FORTIFY_SOURCE=2 -fstack-protector"
 
 for s in $sources
 do echo $CC $CFLAGS -c $src/$s.c -o $s.o
-   cc $CFLAGS -c $src/$s.c -o $s.o
+   $CC $CFLAGS -c $src/$s.c -o $s.o
 done
 
 echo $AR rcs libscrypt.a *.o

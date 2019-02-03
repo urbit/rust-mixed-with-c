@@ -17,28 +17,25 @@ let
 
   osx = []; # TODO
 
-  mesonFlags =
+  mesonFlags = # TODO
     if debug
     then "-Dgc=true  -Dprof=true  -Deventtime=false"
     else "-Dgc=false -Dprof=false -Deventtime=false";
 
-  mesonBuildType =
-    if debug
-    then "debugoptimized"
-    else "release";
-
 in
 
 env.make_derivation {
-  inherit mesonBuildType mesonFlags;
-
   inherit (deps)
     argon2 ed25519 ent h2o murmur3 scrypt secp256k1 sni softfloat3 uv;
 
   inherit (env)
     curl libgmp ncurses openssl libsigsegv zlib;
 
+  CFLAGS  = if debug then "-O0 -g" else "-O3";
+  LDFLAGS = "";
+
   name          = "${name}-${env_name}";
+  exename       = name;
   src           = ./src;
   native_inputs = buildenv;
   cross_inputs  = crossdeps ++ vendor ++ osx;

@@ -12,11 +12,8 @@ cd src
 export PKG_CONFIG_LIBDIR=$PKG_CONFIG_CROSS_PATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_CROSS_PATH
 
-# export CFLAGS="-I$uv/include -I$libgmp/include -I$h2o/include"
-# export CFLAGS="$CFLAGS -I$openssl/include"
-
-export CFLAGS=""
-export LDFLAGS=""
+export CFLAGS
+export LDFLAGS
 
 for dep in $argon2 \
            $curl \
@@ -34,15 +31,14 @@ for dep in $argon2 \
            $softfloat3 \
            $uv \
            $zlib
-do CFLAGS="$CFLAGS -I$dep/include"
+do find $dep/{lib,include} -type f
+   CFLAGS="$CFLAGS -I$dep/include"
    LDFLAGS="$LDFLAGS -L$dep/lib"
 done
 
 CFLAGS="$CFLAGS -I$ncurses/include/ncurses"
 
-find $scrypt && exit
-
 ./build.sh
 
 mkdir -p $out/bin
-cp urbit $out/bin/$name
+cp urbit $out/bin/$exename
