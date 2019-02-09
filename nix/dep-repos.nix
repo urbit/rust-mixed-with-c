@@ -1,3 +1,7 @@
+# This is a hack to give us access to the fetching of dependency repos
+# as nix builds. We use this to cache those Cachix for faster rebuilds
+# in CI.
+
 with (import ./deps.nix {});
 
 {

@@ -1,7 +1,0 @@
-{ pkgs }:
-
-pkgs.stdenv.mkDerivation {
-  name = "arvo";
-  builder = ./builder.sh;
-  src = pkgs.buildRustCrateHelpers.exclude [ ".git" ] ./src;
-}

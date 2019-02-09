@@ -16,17 +16,17 @@ let
   darwin  = release "darwin"  nixcrpkgs.mac;
 
   hello = env:
-    import ../pkg/hello/release.nix env;
+    import ./pkgs/hello/release.nix env;
 
   hellodep = env:
-    import ../pkg/hellodep/release.nix env {};
+    import ./pkgs/hellodep/release.nix env {};
 
   urbit = env:
-    import ../pkg/urbit/release.nix env
+    import ./pkgs/urbit/release.nix env
       { debug = false; name = "urbit"; };
 
   urbit-debug = env:
-    import ../pkg/urbit/release.nix env
+    import ./pkgs/urbit/release.nix env
       { debug = true; name = "urbit-debug"; };
 
 in

@@ -1,12 +1,12 @@
 [submodule "pkg/urbit/src"]
-	path = pkg/urbit/src
+	path = pkg/urbit
 	url = https://github.com/urbit/urbit.git
 [submodule "pkg/arvo/src"]
-	path = pkg/arvo/src
+	path = pkg/arvo
 	url = https://github.com/urbit/arvo.git
 [submodule "nix/nixcrpkgs"]
 	path = nix/nixcrpkgs
 	url = https://github.com/urbit/nixcrpkgs
 [submodule "dep/ent/src"]
-	path = dep/ent/src
+	path = nix/deps/ent/src
 	url = https://github.com/urbit/libent
