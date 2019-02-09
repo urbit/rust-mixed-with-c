@@ -34,7 +34,10 @@ pkgs.stdenv.mkDerivation {
 
   nativeBuildInputs = deps ++ vendor;
 
-  CFLAGS           = "-std=gnu99 " + (if debug then "-O0 -g" else "-O3");
+  # See https://github.com/NixOS/nixpkgs/issues/18995
+  hardeningDisable = if debug then [ "all" ] else [];
+
+  CFLAGS           = if debug then "-O0 -g" else "-O3";
   MEMORY_DEBUG     = debug;
   CPU_DEBUG        = debug;
   EVENT_TIME_DEBUG = false;
