@@ -14,7 +14,8 @@ PKG_CONFIG=pkg-config-cross \
 HOST=$host                  \
 ./configure
 
-make urbit -j8
+make urbit urbit-worker -j8
 
 mkdir -p $out/bin
-cp urbit $out/bin/$exename
+cp urbit        $out/bin/$exename
+cp urbit-worker $out/bin/$exename-worker

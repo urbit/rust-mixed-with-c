@@ -6,8 +6,8 @@ cd src
 
 ./configure
 
-make vere/unix.o
-make urbit -j8
+make urbit urbit-worker -j8
 
 mkdir -p $out/bin
 cp urbit $out/bin/$exename
+cp urbit-worker $out/bin/$exename-worker
