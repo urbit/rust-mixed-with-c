@@ -9,7 +9,7 @@ build:
 
 all: build release test
 
-install: build
+install:
 	nix-env -f . -iA urbit -iA urbit-debug
 
 release:
