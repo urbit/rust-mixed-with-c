@@ -12,4 +12,4 @@
 	url = https://github.com/urbit/libent
 [submodule "pkg/urb"]
 	path = pkg/urb
-	url = git@github.com:urbit/urb.git
+	url = https://github.com/urbit/urb.git
