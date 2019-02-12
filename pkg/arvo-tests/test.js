@@ -8,7 +8,7 @@ var Urbit   = runner.Urbit;
 var ERROR   = runner.ERROR;
 var actions = runner.actions
 
-var pill = process.env.BOOTPILL || 'urbit.pill';
+var pill = process.env.BRASS_PILL || 'urbit.pill';
 
 var args  = ['-B', pill, '-A', '..', '-cSF', 'zod', 'zod'];
 var urbit = new Urbit(args);
