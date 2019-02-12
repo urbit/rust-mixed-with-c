@@ -18,7 +18,6 @@ rec {
   extrema      = import ./pkgs/extrema      { inherit pkgs minima; };
   prog         = import ./pkgs/prog         { inherit pkgs rusthello minima; };
   hello        = import ./pkgs/hello        { inherit pkgs; };
-  boot         = import ./boot              { inherit pkgs; };
   urb          = import ../pkg/urb          { inherit pkgs; };
 
   urbit = import ./pkgs/urbit {
