@@ -1,16 +1,4 @@
-{ pkgs ? import ../nixpkgs.nix }:
-
-let
-
-  tlon = import ../pkgs.nix { pkgs=pkgs; };
-  deps = import ../deps.nix { pkgs=pkgs; };
-
-in
-
-{
-  urbitExecutable ? "${tlon.urbit}/bin/urbit",
-  brassPill       ? ../../bin/brass.pill
-}:
+{ pkgs, tlon, deps, urbit, brassPill, fakezod, arvo }:
 
 let
 
@@ -39,11 +27,13 @@ let
 in
 
 pkgs.stdenv.mkDerivation rec {
-  name        = "boot";
+  name        = "solid";
   builder     = ./builder.sh;
   buildInputs = tools ++ libs ++ osx ++ vendor ++ exe;
 
-  PILL  = brassPill;
-  URBIT = urbitExecutable;
-  URB   = "${tlon.urb}/bin/urb";
+  SLEEP   = "${pkgs.coreutils}/bin/sleep";
+  FAKEZOD = fakezod;
+  URBIT   = "${urbit}/bin/urbit";
+  URB     = "${tlon.urb}/bin/urb";
+  ARVO    = arvo;
 }
