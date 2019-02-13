@@ -17,7 +17,7 @@ rec {
   };
 
   solid = import ./solid {
-    inherit pkgs tlon deps urbit brassPill fakezod;
+    inherit pkgs tlon deps urbit fakezod;
     inherit (tlon) arvo;
   };
 }

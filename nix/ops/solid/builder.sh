@@ -5,31 +5,29 @@ set -ex
 cp -r $FAKEZOD ./zod
 chmod -R u+rw ./zod
 
-$URBIT -d ./zod
-
-$URB -D '|' -p "autoload"
-$URB -D '%' -p "mount"
+urbit -d ./zod
 
 pid=$(< ./zod/.vere.lock)
-kill $pid
-wait $pid
 
-cp -r $ARVO/sys            $FAKEZOD/home/
-cp    $ARVO/gen/solid.hoon $FAKEZOD/home/gen/
-cp    $ARVO/lib/pill.hoon  $FAKEZOD/home/lib/
+cleanup () {
+  kill $pid || true
+}
 
-$URBIT -d ./zod
+lens_port () {
+  cat ./zod/.http.ports | grep 'insecure loopback' | sed 's/ .*//'
+}
 
-$SLEEP 30 # HACK: Wait for <sync> to finish.
+trap cleanup EXIT
 
-$URB -f urbit.pill -d '+solid, =dub &'
+export LENS_PORT=$(lens_port)
 
-pid=$(< ./zod/.vere.lock)
-kill $pid
-wait $pid
+urb -p hood -d '+hood/autoload |'
+urb -p hood -d "+hood/mount %"
 
-mkdir -p "$(dirname $PILL)"
+cp -r $ARVO/sys            ./zod/home/
+cp    $ARVO/gen/solid.hoon ./zod/home/gen/
+cp    $ARVO/lib/pill.hoon  ./zod/home/lib/
 
-cp "$FAKEZOD/.urb/put/urbit.pill" "$PILL"
+urb -f urbit.pill -d '+solid, =dub &'
 
-# kill "$(< $out/.vere.lock)"
+cp ./zod/.urb/put/urbit.pill $out

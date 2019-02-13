@@ -1,5 +1,8 @@
 { pkgs }:
 
+(import ../../pkgs.nix {}).urbit
+
+/*
 let
 
   src =
@@ -21,3 +24,4 @@ pkgs.stdenv.mkDerivation {
     cp $src/urbit-worker $out/bin/urbit-worker
   '';
 }
+*/
