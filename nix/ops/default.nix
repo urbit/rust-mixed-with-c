@@ -2,8 +2,8 @@
 
 let
 
-  deps = import ../deps.nix { inherit pkgs; };
-  tlon = import ../pkgs.nix { inherit pkgs; };
+  deps = import ../deps { inherit pkgs; };
+  tlon = import ../pkgs { inherit pkgs; };
 
   brassPill = ../../bin/pill/brass.pill;
 

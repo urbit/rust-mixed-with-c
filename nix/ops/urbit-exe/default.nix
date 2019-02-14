@@ -1,6 +1,6 @@
 { pkgs }:
 
-(import ../../pkgs.nix {}).urbit
+(import ../../pkgs {}).urbit
 
 /*
 let
