@@ -10,7 +10,7 @@ build:
 all: build release test
 
 install:
-	nix-env -f . -iA urbit -iA urbit-debug
+	nix-env -f . -iA urbit -iA urbit-debug -iA urb
 
 release:
 	sh/release urbit linux32

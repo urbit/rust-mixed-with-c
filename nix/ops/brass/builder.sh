@@ -21,11 +21,7 @@ urb ./zod -p hood -d "+hood/mount %"
 rm -r ./zod/home
 cp -r $ARVO ./zod/home
 
-# cp -r $ARVO/sys            ./zod/home/
-# cp    $ARVO/gen/solid.hoon ./zod/home/gen/
-# cp    $ARVO/lib/pill.hoon  ./zod/home/lib/
-
 urb ./zod -p hood       -d "+hood/commit %home"
-urb ./zod -P urbit.pill -d '+solid, =dub &'
+urb ./zod -P brass.pill -d '+brass'
 
-mv urbit.pill $out
+mv brass.pill $out

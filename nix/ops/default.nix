@@ -2,22 +2,45 @@
 
 let
 
-  deps = import ../deps.nix { inherit pkgs; };
-  tlon = import ../pkgs.nix { inherit pkgs; };
-
-  brassPill = ../../bin/pill/brass.pill;
+  deps  = import ../deps.nix { inherit pkgs; };
+  tlon  = import ../pkgs.nix { inherit pkgs; };
+  arvo  = tlon.arvo;
+  urbit = tlon.urbit;
 
 in
 
 rec {
-  urbit = import ./urbit-exe { inherit pkgs; };
 
-  fakezod = import ./fakezod {
-    inherit pkgs tlon deps urbit brassPill;
+  bootzod = import ./fakeship {
+    inherit pkgs tlon deps urbit;
+    brass = ../../bin/pill/brass.pill;
+    ship = "zod";
+  };
+
+  bootbus = import ./fakeship {
+    inherit pkgs tlon deps urbit;
+    brass = ../../bin/pill/brass.pill;
+    ship = "bus";
+  };
+
+  test = import ./test {
+    inherit pkgs tlon deps urbit arvo;
+    ship = bootbus;
   };
 
   solid = import ./solid {
-    inherit pkgs tlon deps urbit fakezod;
-    inherit (tlon) arvo;
+    inherit arvo pkgs tlon deps urbit;
+    fakezod = bootzod;
   };
+
+  brass = import ./brass {
+    inherit arvo pkgs tlon deps urbit;
+    fakezod = bootzod;
+  };
+
+  fakezod = import ./fakeship {
+    inherit pkgs tlon deps urbit brass;
+    ship = "zod";
+  };
+
 }
