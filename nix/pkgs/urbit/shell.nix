@@ -1,7 +1,7 @@
 let
 
-  pkgs = import ../../nix/nixpkgs.nix;
-  deps = import ../../nix/deps.nix { inherit pkgs; };
+  pkgs = import ../../nixpkgs.nix;
+  deps = import ../../deps.nix { inherit pkgs; };
 
 in
 
