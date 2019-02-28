@@ -8,10 +8,7 @@ in
 
 rec {
   nodehello    = import ./nodehello    { inherit pkgs; };
-  vere-tests   = import ./vere-tests   { inherit pkgs; };
   arvo         = import ./arvo         { inherit pkgs; };
-  arvo-tests   = import ./arvo-tests   { inherit pkgs; };
-  urbit-runner = import ./urbit-runner { inherit pkgs; };
   rusthello    = import ./rusthello    { inherit pkgs minima extrema; };
   carnixhello  = import ./carnixhello  { inherit pkgs minima extrema; };
   minima       = import ./minima       { inherit pkgs; };

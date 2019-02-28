@@ -2,7 +2,7 @@
 
 This was an experiment to see what it looks like to combine C and Rust
 in a single project, and then it turned into a full-blow nixification
-of the all urbit code.
+of the all Urbit code.
 
 Check out `.travis.yml` to see how this works in CI.
 
@@ -31,3 +31,27 @@ In order to build everything an push results to the shared cache, run:
 ```bash
 ./sh/cachix
 ```
+
+## Open Questions About Monorepo layout
+
+- Should nix build scripts live *in* the packages
+  (i.e. `pkg/urbit/default.nix`) or outside of it
+  (nix/pkgs/urbit/default.nix)? What are the pros and cons of moving
+  them into the packages?
+
+  - PRO Setting up the `nix-shell` flow is slightly cleaner.
+  - PRO Everything in one place, less fragmentation.
+  - CON Nix build scripts become part of the build. Changes to the build
+        scripts trigger rebuilds (or you can filter them out, but that adds
+        a little bit of complexity to every build)
+  - CON Packages get messier. Five additional files in the root of
+        each package: `default.nix`, `release.nix`, `shell.nix`,
+        `builder.sh`, `release.sh`.
+
+## Open Questions About the Bootstrapping Pills
+
+The pill that's used for bootstrapping in CI is stored in
+`bin/pill/*.pill`. This doesn't need to be updated constantly. In my
+mind, I'm imagining that it would get updated for each release, or
+updated whenever we make a breaking change to the kernel. This deserves
+further discussion.
