@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-nix-shell nix/test-env.nix --pure --command "bash $@"
