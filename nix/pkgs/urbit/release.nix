@@ -1,6 +1,6 @@
 { env_name, env, deps }:
 
-{ name ? "urbit", debug ? false }:
+{ ent, name ? "urbit", debug ? false }:
 
 let
 
@@ -10,7 +10,7 @@ let
 
   vendor =
     with deps;
-    [ argon2 softfloat3 ed25519 ent h2o scrypt uv murmur3 secp256k1 sni ];
+    [ argon2 softfloat3 ed25519 h2o scrypt uv murmur3 secp256k1 sni ];
 
 in
 
@@ -24,6 +24,6 @@ env.make_derivation {
   name          = "${name}-${env_name}";
   exename       = name;
   src           = ../../../pkg/urbit;
-  cross_inputs  = crossdeps ++ vendor;
+  cross_inputs  = crossdeps ++ vendor ++ [ ent ];
   builder       = ./release.sh;
 }

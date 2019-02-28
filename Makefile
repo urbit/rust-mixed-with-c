@@ -18,7 +18,7 @@ release:
 	sh/release urbit darwin
 
 test:
-	nix-shell nix/test-env.nix --pure --command sh/vere-tests
+	sh/test
 
 clean:
 	rm -rf ./out ./work

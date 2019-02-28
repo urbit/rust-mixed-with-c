@@ -13,13 +13,13 @@ rec {
 
   bootzod = import ./fakeship {
     inherit pkgs tlon deps urbit;
-    brass = ../../bin/pill/brass.pill;
+    brass = ../../bin/brass.pill;
     ship = "zod";
   };
 
   bootbus = import ./fakeship {
     inherit pkgs tlon deps urbit;
-    brass = ../../bin/pill/brass.pill;
+    brass = ../../bin/brass.pill;
     ship = "bus";
   };
 

@@ -10,5 +10,4 @@ rec {
   softfloat3 = import ./softfloat3   { inherit pkgs; };
   secp256k1  = import ./secp256k1    { inherit pkgs; };
   h2o        = import ./h2o          { inherit pkgs uv; };
-  ent        = import ./ent          { inherit pkgs; };
 }

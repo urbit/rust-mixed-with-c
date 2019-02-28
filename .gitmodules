@@ -8,7 +8,7 @@
 	path = nix/nixcrpkgs
 	url = https://github.com/urbit/nixcrpkgs
 [submodule "pkg/deps/ent/src"]
-	path = nix/deps/ent/src
+	path = pkg/ent
 	url = https://github.com/urbit/libent
 [submodule "pkg/urb"]
 	path = pkg/urb

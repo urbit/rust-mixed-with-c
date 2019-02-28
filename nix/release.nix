@@ -21,19 +21,23 @@ let
   hellodep = env:
     import ./pkgs/hellodep/release.nix env {};
 
+  ent = env:
+    import ./pkgs/ent/cross.nix env;
+
   urbit = env:
     import ./pkgs/urbit/release.nix env
-      { debug = false; name = "urbit"; };
+      { ent = ent env; debug = false; name = "urbit"; };
 
   urbit-debug = env:
     import ./pkgs/urbit/release.nix env
-      { debug = true; name = "urbit-debug"; };
+      { ent = ent env; debug = true; name = "urbit-debug"; };
 
 in
 
 {
   linux32-env = linux32.env;
   linux32 = linux32.deps // {
+    ent         = ent         linux32;
     hello       = hello       linux32;
     hellodep    = hellodep    linux32;
     urbit       = urbit       linux32;
@@ -42,6 +46,7 @@ in
 
   linux64-env = linux64.env;
   linux64 = linux64.deps // {
+    ent         = ent         linux64;
     hello       = hello       linux64;
     hellodep    = hellodep    linux64;
     urbit       = urbit       linux64;
@@ -50,6 +55,7 @@ in
 
   darwin-env = darwin.env;
   darwin = darwin.deps // {
+    ent         = ent         darwin;
     hello       = hello       darwin;
     hellodep    = hellodep    darwin;
     urbit       = urbit       darwin;

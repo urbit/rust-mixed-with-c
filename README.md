@@ -55,3 +55,9 @@ The pill that's used for bootstrapping in CI is stored in
 mind, I'm imagining that it would get updated for each release, or
 updated whenever we make a breaking change to the kernel. This deserves
 further discussion.
+
+## CI TODOs
+
+- Save 14s by using the travis cache to cache the `cachix` install.
+
+  https://github.com/travis-ci/travis-ci/issues/6604

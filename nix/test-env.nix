@@ -37,8 +37,8 @@ pkgs.stdenv.mkDerivation rec {
   # URBIT_EXE   = "${tlon.urbit}/bin/urbit";
   URBIT_EXE   = "${tlon.urbit-debug}/bin/urbit-debug";
   URBIT_DEBUG = "${tlon.urbit-debug}/bin/urbit-debug";
-  IVORY_PILL  = ../bin/pill/ivory.pill;
-  BRASS_PILL  = ../bin/pill/brass.pill;
+  IVORY_PILL  = ../bin/ivory.pill;
+  BRASS_PILL  = ../bin/brass.pill;
   FAKEZOD     = fakezod;
   PILL        = "./out/urbit.pill";
   ARVO        = tlon.arvo;

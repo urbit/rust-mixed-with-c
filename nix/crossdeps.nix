@@ -10,5 +10,4 @@ rec {
   softfloat3 = import ./deps/softfloat3/cross.nix { inherit crossenv; };
   secp256k1  = import ./deps/secp256k1/cross.nix  { inherit crossenv; };
   h2o        = import ./deps/h2o/cross.nix        { inherit crossenv uv; };
-  ent        = import ./deps/ent/cross.nix        { inherit crossenv; };
 }
