@@ -2,7 +2,7 @@
 # as nix builds. We use this to cache those Cachix for faster rebuilds
 # in CI.
 
-with (import ./deps.nix {});
+with (import ./deps {});
 
 {
   argon2-src     = argon2.src;

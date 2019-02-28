@@ -1,8 +1,8 @@
 let
 
   pkgs = import ./nixpkgs.nix;
-  tlon = import ./pkgs.nix { pkgs=pkgs; };
-  deps = import ./deps.nix { pkgs=pkgs; };
+  tlon = import ./pkgs { pkgs=pkgs; };
+  deps = import ./deps { pkgs=pkgs; };
 
   tools =
     with pkgs;

@@ -1,9 +1,10 @@
 let
 
   pkgs = import ./nixpkgs.nix;
-  tlon = import ./pkgs.nix { pkgs=pkgs; };
-  deps = import ./deps.nix { pkgs=pkgs; };
-  boot = import ./boot {}
+  tlon = import ./pkgs { pkgs=pkgs; };
+  deps = import ./deps { pkgs=pkgs; };
+
+  fakezod = (import ./ops {}).fakezod;
 
   tools =
     with pkgs;
@@ -38,7 +39,7 @@ pkgs.stdenv.mkDerivation rec {
   URBIT_DEBUG = "${tlon.urbit-debug}/bin/urbit-debug";
   IVORY_PILL  = ../bin/pill/ivory.pill;
   BRASS_PILL  = ../bin/pill/brass.pill;
-  FAKEZOD     = boot;
+  FAKEZOD     = fakezod;
   PILL        = "./out/urbit.pill";
   ARVO        = tlon.arvo;
 }

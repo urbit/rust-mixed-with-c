@@ -1,7 +1,7 @@
 let
 
-  pkgs = import ./nix/pkgs.nix {};
-  deps = import ./nix/deps.nix {};
+  pkgs = import ./nix/pkgs {};
+  deps = import ./nix/deps {};
 
 in
 
